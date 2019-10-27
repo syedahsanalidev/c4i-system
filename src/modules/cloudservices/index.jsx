@@ -1,7 +1,7 @@
 import React from 'react';
 import './cloudservices.css';
 
-const services = () => {
+const services = ({name}) => {
     const cloudServices = [
         {
             title: 'Saas'
@@ -16,7 +16,7 @@ const services = () => {
             <div className="row">
                 <div className="col-sm-12" style={{"margin-top": "10px"}}>
                     <div className="quiz_content_area">
-                        <h1 className="quiz_title">Cloud Services</h1>
+                        <h1 className="quiz_title">{name}</h1>
                         <div className="row">
                             <div className="col-sm-3">
                                 <div className="quiz_card_area">
@@ -198,5 +198,8 @@ const services = () => {
         </div>
         {/* end of container */}
     </section>
+};
+services.defaultProps={
+    name:'Cloud Services'
 };
 export default services;
