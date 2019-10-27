@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import CloudServices from './modules/cloudservices'
 import HomeTemplate from './modules/home'
-import SecurityRequirements from './modules/securityRequirements'
+import SecurityRequirements from './modules/securityRequirements';
+import SummaryChart from './modules/chart';
 
 function App() {
     const [showService, setShowService] = useState(false);
@@ -22,6 +23,7 @@ function App() {
             {!showService && <CloudServices changeScreen={changeScreen}/>}
             {showService && <CloudServices name="Services" changeScreen={selectScreen}/>}
             <SecurityRequirements/>
+            <SummaryChart/>
         </HomeTemplate>
     );
 }
