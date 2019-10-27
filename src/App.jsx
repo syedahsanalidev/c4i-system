@@ -1,10 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import CloudServices from './modules/cloudservices'
 import HomeTemplate from './modules/home'
 function App() {
-  return (
+    const [screen,setScreen]=useState('cloudServices');
+  const [state,setState]=useState({
+      service:'',
+  })
+
+    function changeScreen() {
+      setScreen("selectedService");
+  }
+    return (
       <HomeTemplate>
-        <CloudServices/>
+        {screen==="cloudServices" && <CloudServices />}
+        {screen==="selectedService" && <CloudServices/>}
       </HomeTemplate>
   );
 }

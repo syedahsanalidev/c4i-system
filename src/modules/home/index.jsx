@@ -8,7 +8,7 @@ const home = ({children}) => {
                 C4I Systems
             </Box>
             <Box direction="row" justify="center">
-                <Box overflow="auto" width="large">
+                <Box overflow="auto">
                     {children}
                 </Box>
             </Box>
