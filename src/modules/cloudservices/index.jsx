@@ -1,7 +1,7 @@
 import React from 'react';
 import './cloudservices.css';
 
-const services = ({name}) => {
+const services = ({name, changeScreen}) => {
     const cloudServices = [
         {
             title: 'Saas'
@@ -18,11 +18,11 @@ const services = ({name}) => {
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">{name}</h1>
                         <div className="row">
-                            {cloudServices.map( ({title})=> {
+                            {cloudServices.map(({title}) => {
                                 return <div className="col-sm-3">
                                     <div className="quiz_card_area">
-                                        <input className="quiz_checkbox" type="checkbox" id={1} defaultValue={1}
-                                               defaultChecked="checked"/>
+                                        <input className="quiz_checkbox" onClick={() => changeScreen()} type="checkbox"
+                                               id={1} defaultValue={1}/>
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
                                                 <div className="quiz_card_icon">
@@ -222,7 +222,7 @@ const services = ({name}) => {
         {/* end of container */}
     </section>
 };
-services.defaultProps={
-    name:'Cloud Services'
+services.defaultProps = {
+    name: 'Cloud Services'
 };
 export default services;
