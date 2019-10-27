@@ -5,15 +5,15 @@ const home = ({children}) => {
     return <Grommet theme={grommet} full>
         <Grid fill rows={["auto", "flex", "auto"]}>
             <Box tag="header" background="brand" pad="small">
-                Header
+                C4I Systems
             </Box>
             <Box direction="row" justify="center">
                 <Box overflow="auto" width="large">
                     {children}
                 </Box>
             </Box>
-            <Box tag="footer" pad="small" background="dark-1">
-                footer
+            <Box style={{textAlign:"center"}} tag="footer" pad="small" justify="center" background="dark-1">
+                Copyright C4I System &copy; 2019
             </Box>
         </Grid>
     </Grommet>
