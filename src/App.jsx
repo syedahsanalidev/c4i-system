@@ -1,8 +1,11 @@
 import React from 'react';
 import CloudServices from './modules/cloudservices'
+import HomeTemplate from './modules/home'
 function App() {
   return (
-    <CloudServices/>
+      <HomeTemplate>
+        <CloudServices/>
+      </HomeTemplate>
   );
 }
 

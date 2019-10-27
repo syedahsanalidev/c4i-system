@@ -16,7 +16,7 @@ const services=()=>{
                 </div>{/* end of col12 */}
                 <div className="col-sm-12">
                     <div className="quiz_content_area">
-                        <h1 className="quiz_title">Reason</h1>
+                        <h1 className="quiz_title">Cloud Services</h1>
                         <div className="row">
                             <div className="col-sm-3">
                                 <div className="quiz_card_area">
