@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import CloudServices from './modules/cloudservices'
 import HomeTemplate from './modules/home'
 function App() {
-    const [screen,setScreen]=useState('cloudServices');
+    const [screen,setScreen]=useState('selectedService');
   const [state,setState]=useState({
       service:'',
   })
@@ -13,7 +13,7 @@ function App() {
     return (
       <HomeTemplate>
         {screen==="cloudServices" && <CloudServices />}
-        {screen==="selectedService" && <CloudServices/>}
+        {screen==="selectedService" && <CloudServices name="Services"/>}
       </HomeTemplate>
   );
 }
