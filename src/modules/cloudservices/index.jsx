@@ -14,12 +14,12 @@ const services = ({name, changeScreen}) => {
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
-                <div className="col-sm-12" style={{"margin-top": "10px"}}>
+                <div className="col-sm-12" style={{marginTop: "10px"}}>
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">{name}</h1>
                         <div className="row">
-                            {cloudServices.map(({title}) => {
-                                return <div className="col-sm-3">
+                            {cloudServices.map(({title},i) => {
+                                return <div key={i} className="col-sm-3">
                                     <div className="quiz_card_area">
                                         <input className="quiz_checkbox" onClick={() => changeScreen()} type="checkbox"
                                                id={1} defaultValue={1}/>
