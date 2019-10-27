@@ -4,17 +4,7 @@ const services=()=>{
     return   <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
-                <div className="col-sm-12">
-                    <div className="quiz_area">
-                        <div className="quiz_backBtn_progressBar">
-                            <a href="#" className="quiz_backBtn"><i className="fa fa-arrow-left" aria-hidden="true" /></a>
-                            <div className="progress">
-                                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '10%'}} aria-valuenow={10} aria-valuemin={0} aria-valuemax={100} />
-                            </div>
-                        </div>{/* end of quiz_backBtn_progressBar */}
-                    </div>{/* end of quiz_area */}
-                </div>{/* end of col12 */}
-                <div className="col-sm-12">
+                <div className="col-sm-12" style={{"margin-top":"10px"}}>
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Cloud Services</h1>
                         <div className="row">
@@ -138,11 +128,6 @@ const services=()=>{
                                     </div>{/* end of single_quiz_card */}
                                 </div>{/* end of quiz_card_area */}
                             </div>{/* end of col3  */}
-                            <div className="col-sm-12">
-                                <div className="quiz_next">
-                                    <button className="quiz_continueBtn">Continue</button>
-                                </div>{/* end of quiz_next */}
-                            </div>{/* end of col12 */}
                         </div>{/* end of quiz_card_area */}
                     </div>{/* end of quiz_content_area */}
                 </div>{/* end of col12 */}
