@@ -8,9 +8,9 @@ import SummaryChart from './modules/chart';
 function App() {
     const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
-        cloudService: '',
-        service:'',
-        requirements:'',
+        cloudService: 0,
+        service: '',
+        requirements: '',
     })
 
     function changeCurrentStep(step) {
@@ -18,21 +18,27 @@ function App() {
     }
 
     function onSelectCloudService(id) {
-        setState({state,cloudService: id})
-    }
-    function onSelectService() {
-        
-    }
-    function onSelectRequirements() {
-        
+        setState({state, cloudService: id})
     }
 
+    function onSelectService() {
+
+    }
+
+    function onSelectRequirements() {
+
+    }
+
+    const {cloudService} = state;
     return (
         <HomeTemplate>
-            {currentStep===1 && <CloudServices onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
-            {currentStep===2 && <Services onSelectService={onSelectService} changeCurrentStep={changeCurrentStep}/>}
-            {currentStep===3 && <SecurityRequirements onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
-            {currentStep ===4 && <SummaryChart/>}
+            {currentStep === 1 &&
+            <CloudServices onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
+            {currentStep === 2 &&
+            <Services cloudService={cloudService} onSelectService={onSelectService} changeCurrentStep={changeCurrentStep}/>}
+            {currentStep === 3 &&
+            <SecurityRequirements onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
+            {currentStep === 4 && <SummaryChart/>}
         </HomeTemplate>
     );
 }

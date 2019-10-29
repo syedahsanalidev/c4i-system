@@ -1,4 +1,12 @@
-id,title
-1,Saas
-2,Paas
-3,Laas
+id,title,cloudServiceId
+1,GSuit,1
+2,dropbox,1
+3,adobe creative cloud,1
+4,salforce,1
+5,AwS elastic bean stalks,2
+6,windows azure,2
+7,google app engine,2
+8,Amazon Web Services (AWS),3
+9,Cisco Metapod,3
+10,Microsoft Azure,3
+11,Google Compute Engine (GCE),3

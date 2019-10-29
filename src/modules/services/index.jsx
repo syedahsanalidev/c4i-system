@@ -3,14 +3,17 @@ import './services.css';
 import * as d3 from 'd3';
 import data from './services.csv';
 
-const Services = ({onSelectService,changeCurrentStep}) => {
+const Services = ({cloudService, onSelectService, changeCurrentStep}) => {
 
     const [services, setServices] = useState([]);
 
     useEffect(() => {
         function readCsv() {
             d3.csv(data).then(function (response) {
-                setServices(response);
+                const filteredData=response.filter(function (item) {
+                    return item.cloudServiceId === cloudService;
+                });
+                setServices(filteredData);
             }).catch(function (err) {
                 throw err;
             })
@@ -26,7 +29,7 @@ const Services = ({onSelectService,changeCurrentStep}) => {
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Services</h1>
                         <div className="row">
-                            {services.map(({title,id}) => {
+                            {services.map(({title, id}) => {
                                 return <div key={id} className="col-sm-3">
                                     <div className="quiz_card_area">
                                         <input className="quiz_checkbox" onClick={() => onSelectService()}
@@ -137,9 +140,12 @@ const Services = ({onSelectService,changeCurrentStep}) => {
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={()=>changeCurrentStep(3)}>Continue</button>
-                            </div>{/* end of quiz_next */}
-                        </div>{/* end of col12 */}
+                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(3)}>Continue
+                                </button>
+                            </div>
+                            {/* end of quiz_next */}
+                        </div>
+                        {/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>
                     {/* end of quiz_content_area */}
