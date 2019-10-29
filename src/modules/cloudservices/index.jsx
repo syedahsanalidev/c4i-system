@@ -3,7 +3,7 @@ import './cloudservices.css';
 import * as d3 from 'd3';
 import data from './cloudServices.csv';
 
-const CloudServices = ({onSelectCloudService}) => {
+const CloudServices = ({onSelectCloudService,changeCurrentStep}) => {
 
     const [cloudServices, setCloudServices] = useState([]);
 
@@ -26,12 +26,12 @@ const CloudServices = ({onSelectCloudService}) => {
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Cloud Services</h1>
                         <div className="row">
-                            {cloudServices.map(({title}, i) => {
-                                return <div key={i} className="col-sm-3">
+                            {cloudServices.map(({title,id}) => {
+                                return <div key={id} className="col-sm-3">
                                     <div className="quiz_card_area">
                                         <input className="quiz_checkbox" onClick={() => onSelectCloudService()}
                                                type="checkbox"
-                                               id={1} defaultValue={1}/>
+                                               id={id} defaultValue={id}/>
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
                                                 <div className="quiz_card_icon">
@@ -137,7 +137,7 @@ const CloudServices = ({onSelectCloudService}) => {
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn">Continue</button>
+                                <button className="quiz_continueBtn" onClick={()=>changeCurrentStep(2)}>Continue</button>
                             </div>{/* end of quiz_next */}
                         </div>{/* end of col12 */}
                         {/* end of quiz_card_area */}

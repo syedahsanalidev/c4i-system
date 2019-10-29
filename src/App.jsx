@@ -26,7 +26,7 @@ function App() {
 
     return (
         <HomeTemplate>
-            {currentStep===1 && <CloudServices onSelectCloudService={onSelectCloudService}/>}
+            {currentStep===1 && <CloudServices onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
             {currentStep===2 && <Services name="Services" onSelectService={onSelectService}/>}
             {currentStep===3 && <SecurityRequirements/>}
             {currentStep ===4 && <SummaryChart/>}
