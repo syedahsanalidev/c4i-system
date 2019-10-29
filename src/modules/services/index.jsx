@@ -3,7 +3,7 @@ import './services.css';
 import * as d3 from 'd3';
 import data from './services.csv';
 
-const Services = ({onSelectCloudService,changeCurrentStep}) => {
+const Services = ({onSelectService,changeCurrentStep}) => {
 
     const [services, setServices] = useState([]);
 
@@ -29,7 +29,7 @@ const Services = ({onSelectCloudService,changeCurrentStep}) => {
                             {services.map(({title,id}) => {
                                 return <div key={id} className="col-sm-3">
                                     <div className="quiz_card_area">
-                                        <input className="quiz_checkbox" onClick={() => onSelectCloudService()}
+                                        <input className="quiz_checkbox" onClick={() => onSelectService()}
                                                type="checkbox"
                                                id={id} defaultValue={id}/>
                                         <div className="single_quiz_card">
