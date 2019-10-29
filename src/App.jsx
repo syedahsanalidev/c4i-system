@@ -2,28 +2,34 @@ import React, {useState} from 'react';
 import CloudServices from './modules/cloudservices'
 import HomeTemplate from './modules/home'
 import SecurityRequirements from './modules/securityRequirements';
+import Services from './modules/services';
 import SummaryChart from './modules/chart';
 
 function App() {
-    const [showService, setShowService] = useState(false);
+    const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
-        service: '',
+        cloudService: '',
+        services:'',
+        requirements:'',
     })
 
-    function changeScreen() {
-        setShowService(true);
+    function changeCurrentStep(step) {
+        setCurrentStep(step)
     }
 
-    function selectScreen() {
+    function onSelectCloudService() {
         // setShowService(true);
+    }
+    function onSelectService() {
+        
     }
 
     return (
         <HomeTemplate>
-            {!showService && <CloudServices changeScreen={changeScreen}/>}
-            {showService && <CloudServices name="Services" changeScreen={selectScreen}/>}
-            <SecurityRequirements/>
-            <SummaryChart/>
+            {currentStep===1 && <CloudServices onSelectCloudService={onSelectCloudService}/>}
+            {currentStep===2 && <Services name="Services" onSelectService={onSelectService}/>}
+            {currentStep===3 && <SecurityRequirements/>}
+            {currentStep ===4 && <SummaryChart/>}
         </HomeTemplate>
     );
 }
