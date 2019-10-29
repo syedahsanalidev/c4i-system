@@ -52,91 +52,6 @@ const CloudServices = ({onSelectCloudService}) => {
                             })}
                             <div className="col-sm-3">
                                 <div className="quiz_card_area">
-                                    <input className="quiz_checkbox" type="checkbox" id={1} defaultValue={1}
-                                           defaultChecked="checked"/>
-                                    <div className="single_quiz_card">
-                                        <div className="quiz_card_content">
-                                            <div className="quiz_card_icon">
-                                                <div className="quiz_icon quiz_icon1"/>
-                                            </div>
-                                            {/* end of quiz_card_media */}
-                                            <div className="quiz_card_title">
-                                                <h3><i className="fa fa-check" aria-hidden="true"/> Title gose Here</h3>
-                                            </div>
-                                            {/* end of quiz_card_title */}
-                                        </div>
-                                        {/* end of quiz_card_content */}
-                                    </div>
-                                    {/* end of single_quiz_card */}
-                                </div>
-                                {/* end of quiz_card_area */}
-                            </div>
-                            {/* end of col3  */}
-                            <div className="col-sm-3">
-                                <div className="quiz_card_area">
-                                    <input className="quiz_checkbox" type="checkbox" id={2} defaultValue={2}/>
-                                    <div className="single_quiz_card">
-                                        <div className="quiz_card_content">
-                                            <div className="quiz_card_icon">
-                                                <div className="quiz_icon quiz_icon2"/>
-                                            </div>
-                                            {/* end of quiz_card_media */}
-                                            <div className="quiz_card_title">
-                                                <h3><i className="fa fa-check" aria-hidden="true"/> Title Gose Here</h3>
-                                            </div>
-                                            {/* end of quiz_card_title */}
-                                        </div>
-                                        {/* end of quiz_card_content */}
-                                    </div>
-                                    {/* end of single_quiz_card */}
-                                </div>
-                                {/* end of quiz_card_area */}
-                            </div>
-                            {/* end of col3  */}
-                            <div className="col-sm-3">
-                                <div className="quiz_card_area">
-                                    <input className="quiz_checkbox" type="checkbox" id={2} defaultValue={2}/>
-                                    <div className="single_quiz_card">
-                                        <div className="quiz_card_content">
-                                            <div className="quiz_card_icon">
-                                                <div className="quiz_icon quiz_icon3"/>
-                                            </div>
-                                            {/* end of quiz_card_media */}
-                                            <div className="quiz_card_title">
-                                                <h3><i className="fa fa-check" aria-hidden="true"/> Title Gose Here</h3>
-                                            </div>
-                                            {/* end of quiz_card_title */}
-                                        </div>
-                                        {/* end of quiz_card_content */}
-                                    </div>
-                                    {/* end of single_quiz_card */}
-                                </div>
-                                {/* end of quiz_card_area */}
-                            </div>
-                            {/* end of col3  */}
-                            <div className="col-sm-3">
-                                <div className="quiz_card_area">
-                                    <input className="quiz_checkbox" type="checkbox" id={2} defaultValue={2}/>
-                                    <div className="single_quiz_card">
-                                        <div className="quiz_card_content">
-                                            <div className="quiz_card_icon">
-                                                <div className="quiz_icon quiz_icon4"/>
-                                            </div>
-                                            {/* end of quiz_card_media */}
-                                            <div className="quiz_card_title">
-                                                <h3><i className="fa fa-check" aria-hidden="true"/> Title Goes Here</h3>
-                                            </div>
-                                            {/* end of quiz_card_title */}
-                                        </div>
-                                        {/* end of quiz_card_content */}
-                                    </div>
-                                    {/* end of single_quiz_card */}
-                                </div>
-                                {/* end of quiz_card_area */}
-                            </div>
-                            {/* end of col3  */}
-                            <div className="col-sm-3">
-                                <div className="quiz_card_area">
                                     <input className="quiz_checkbox" type="checkbox" id={2} defaultValue={2}/>
                                     <div className="single_quiz_card">
                                         <div className="quiz_card_content">
@@ -220,6 +135,11 @@ const CloudServices = ({onSelectCloudService}) => {
                             </div>
                             {/* end of col3  */}
                         </div>
+                        <div className="col-sm-12">
+                            <div className="quiz_next">
+                                <button className="quiz_continueBtn">Continue</button>
+                            </div>{/* end of quiz_next */}
+                        </div>{/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>
                     {/* end of quiz_content_area */}
