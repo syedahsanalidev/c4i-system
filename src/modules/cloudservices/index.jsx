@@ -1,27 +1,36 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './cloudservices.css';
+import * as d3 from 'd3';
+import data from './cloudServices.csv';
 
-const services = ({name, changeScreen}) => {
-    const cloudServices = [
-        {
-            title: 'Saas'
-        }, {
-            title: 'Paas'
-        }, {
-            title: 'Laas'
-        },
-    ];
+const CloudServices = ({onSelectCloudService}) => {
+
+    const [cloudServices, setCloudServices] = useState([]);
+
+    useEffect(() => {
+        function readCsv() {
+            d3.csv(data).then(function (response) {
+                setCloudServices(response);
+            }).catch(function (err) {
+                throw err;
+            })
+        }
+
+        readCsv()
+    }, []);
+
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
                 <div className="col-sm-12" style={{marginTop: "10px"}}>
                     <div className="quiz_content_area">
-                        <h1 className="quiz_title">{name}</h1>
+                        <h1 className="quiz_title">Cloud Services</h1>
                         <div className="row">
                             {cloudServices.map(({title}, i) => {
                                 return <div key={i} className="col-sm-3">
                                     <div className="quiz_card_area">
-                                        <input className="quiz_checkbox" onClick={() => changeScreen()} type="checkbox"
+                                        <input className="quiz_checkbox" onClick={() => onSelectCloudService()}
+                                               type="checkbox"
                                                id={1} defaultValue={1}/>
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
@@ -222,7 +231,4 @@ const services = ({name, changeScreen}) => {
         {/* end of container */}
     </section>
 };
-services.defaultProps = {
-    name: 'Cloud Services'
-};
-export default services;
+export default CloudServices;
