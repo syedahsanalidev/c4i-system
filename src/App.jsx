@@ -23,12 +23,15 @@ function App() {
     function onSelectService() {
         
     }
+    function onSelectRequirements() {
+        
+    }
 
     return (
         <HomeTemplate>
             {currentStep===1 && <CloudServices onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
             {currentStep===2 && <Services onSelectService={onSelectService} changeCurrentStep={changeCurrentStep}/>}
-            {currentStep===3 && <SecurityRequirements/>}
+            {currentStep===3 && <SecurityRequirements onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
             {currentStep ===4 && <SummaryChart/>}
         </HomeTemplate>
     );
