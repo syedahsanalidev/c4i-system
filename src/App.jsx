@@ -17,12 +17,12 @@ function App() {
         setCurrentStep(step)
     }
 
-    function onSelectCloudService(id) {
-        setState({state, cloudService: id})
+    function onSelectCloudService(cloudServiceId) {
+        setState({...state, cloudService: cloudServiceId})
     }
 
-    function onSelectService() {
-
+    function onSelectService(serviceId) {
+        setState({...state, service: serviceId})
     }
 
     function onSelectRequirements() {
