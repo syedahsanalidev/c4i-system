@@ -9,7 +9,7 @@ function App() {
     const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
         cloudService: '',
-        services:'',
+        service:'',
         requirements:'',
     })
 
@@ -17,8 +17,8 @@ function App() {
         setCurrentStep(step)
     }
 
-    function onSelectCloudService() {
-        // setShowService(true);
+    function onSelectCloudService(id) {
+        setState({state,cloudService: id})
     }
     function onSelectService() {
         

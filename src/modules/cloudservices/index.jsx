@@ -29,7 +29,7 @@ const CloudServices = ({onSelectCloudService,changeCurrentStep}) => {
                             {cloudServices.map(({title,id}) => {
                                 return <div key={id} className="col-sm-3">
                                     <div className="quiz_card_area">
-                                        <input className="quiz_checkbox" onClick={() => onSelectCloudService()}
+                                        <input className="quiz_checkbox" onClick={() => onSelectCloudService(id)}
                                                type="checkbox"
                                                id={id} defaultValue={id}/>
                                         <div className="single_quiz_card">
