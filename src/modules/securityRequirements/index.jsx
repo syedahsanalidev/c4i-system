@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import MultiSelectBox from 'react-multiselect-box'
-import 'react-multiselect-box/build/css/index.css'
 import * as d3 from "d3";
 import data from "./requirements.csv";
+import './securityRequirements.css'
 
 const StudentFilter = ({updateSearch, searchText}) => {
 
@@ -14,7 +13,7 @@ const StudentFilter = ({updateSearch, searchText}) => {
         <input type="text" placeholder="Find a student" className="input-search" onChange={handleChange}
                value={searchText}/>
     )
-}
+};
 
 const Student = ({name}) => <li className="student-item">{name}</li>;
 
@@ -33,6 +32,7 @@ const StudentList = ({students, filter}) => {
         </ul>
     )
 };
+
 const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
     const [state, setState] = useState({
@@ -102,4 +102,5 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
         {/* end of container */}
     </section>
 };
+
 export default Requirements;
