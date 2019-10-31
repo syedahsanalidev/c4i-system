@@ -7,11 +7,7 @@ const home = ({children}) => {
             <Box tag="header" background="brand" pad="small">
                 C4I Systems
             </Box>
-            <Box direction="row" justify="center">
-                <Box overflow="auto">
-                    {children}
-                </Box>
-            </Box>
+            {children}
             <Box style={{textAlign:"center"}} tag="footer" pad="small" justify="center" background="dark-1">
                 Copyright C4I System &copy; 2019
             </Box>
