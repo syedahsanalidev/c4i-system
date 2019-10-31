@@ -25,8 +25,8 @@ function App() {
         setState({...state, service: serviceId})
     }
 
-    function onSelectRequirements() {
-
+    function onSelectRequirements(requirementId) {
+        setState({...state, requirements: requirementId})
     }
 
     const {cloudService} = state;
