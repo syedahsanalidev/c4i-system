@@ -16,6 +16,7 @@ body {
     font-weight: 300;
     margin-top: 0;
     color: #131815;
+    text-align: center;
 }
 .input-search {
     display: block;
@@ -40,5 +41,11 @@ body {
     color: #131815;
     font-weight: 300;
     padding: 8px 8px;
+}
+.align-center{
+    text-align: center;
+}
+.mb-10{
+    margin-bottom: 10px;
 }
 

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as d3 from "d3";
+import questionsData from "./questions.csv";
 import data from "./requirements.csv";
 import './securityRequirements.css'
 
@@ -72,13 +73,16 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Security Requirements</h1>
                         <div className="row">
-                            <select>
-                                {requirements.map((item) => {
-                                    return <option key={item.value} value={item.value}>{item.desc}</option>
-                                })}
-                            </select>
-                            <div className="app">
-                                <h1 className="app__title">Your Students</h1>
+                            <div className="col-sm-12 align-center mb-10">
+                                <select>
+                                    <option value="0">Select Secuirty Requirements</option>
+                                    {requirements.map((item) => {
+                                        return <option key={item.value} value={item.value}>{item.desc}</option>
+                                    })}
+                                </select>
+                            </div>
+                            <div className="col-sm-12">
+                                <h1 className="app__title">Questions and Metrices</h1>
                                 <StudentFilter updateSearch={updateSearch} searchText={filter}/>
                                 <StudentList filter={filter} students={students}/>
                             </div>

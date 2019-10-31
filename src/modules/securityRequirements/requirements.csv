@@ -1,6 +1,6 @@
 value,desc
-1,Confidently
-2,Integrity
-3,Accountability
-4,Availability
-5,System Configuration
+1,Identity and Access Management
+2,Network Security
+3,VMs and Host Security
+4,PaaS and SaaS security
+5,Cryptography and Key Management
