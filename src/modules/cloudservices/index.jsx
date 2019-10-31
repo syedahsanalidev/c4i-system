@@ -3,10 +3,9 @@ import './cloudservices.css';
 import * as d3 from 'd3';
 import data from './cloudServices.csv';
 
-const CloudServices = ({onSelectCloudService,changeCurrentStep}) => {
+const CloudServices = ({onSelectCloudService, changeCurrentStep}) => {
 
     const [cloudServices, setCloudServices] = useState([]);
-
     useEffect(() => {
         function readCsv() {
             d3.csv(data).then(function (response) {
@@ -18,7 +17,6 @@ const CloudServices = ({onSelectCloudService,changeCurrentStep}) => {
 
         readCsv()
     }, []);
-
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -26,11 +24,12 @@ const CloudServices = ({onSelectCloudService,changeCurrentStep}) => {
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Cloud Services</h1>
                         <div className="row">
-                            {cloudServices.map(({title,id}) => {
+                            {cloudServices.map(({title, id}) => {
                                 return <div key={id} className="col-sm-3">
                                     <div className="quiz_card_area">
-                                        <input className="quiz_checkbox" onClick={() => onSelectCloudService(id)}
-                                               type="checkbox"
+                                        <input name="cloudService" className="quiz_checkbox"
+                                               onClick={() => onSelectCloudService(id)}
+                                               type="radio"
                                                id={id} defaultValue={id}/>
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
@@ -53,9 +52,12 @@ const CloudServices = ({onSelectCloudService,changeCurrentStep}) => {
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={()=>changeCurrentStep(2)}>Continue</button>
-                            </div>{/* end of quiz_next */}
-                        </div>{/* end of col12 */}
+                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(2)}>Continue
+                                </button>
+                            </div>
+                            {/* end of quiz_next */}
+                        </div>
+                        {/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>
                     {/* end of quiz_content_area */}
