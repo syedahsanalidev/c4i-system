@@ -1,19 +1,36 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MultiSelectBox from 'react-multiselect-box'
 import 'react-multiselect-box/build/css/index.css'
+import * as d3 from "d3";
+import data from "./requirements.csv";
 
 const Requirements = ({changeCurrentStep,onSelectRequirements}) => {
+
     const [state,setState]=useState({
         selectedOne:[],
+        requirements:[]
     });
+
+    useEffect(() => {
+        function readCsv() {
+            d3.csv(data).then(function (response) {
+response.pop();
+                setState({...state,requirements: response})
+            }).catch(function (err) {
+                throw err;
+            })
+        }
+
+        readCsv()
+    }, []);
     const securityRequirements = [
         {desc: 'Confidently', value: '1'},
         {desc: 'Integrity', value: '2'},
         {desc: 'Accountability', value: '3'},
         {desc: 'Availability', value: '4'},
         {desc: 'System Configuration', value: '5'},
-        ];
-    const { selectedOne } = state;
+    ];
+    const { selectedOne,requirements } = state;
     // return
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
@@ -23,7 +40,7 @@ const Requirements = ({changeCurrentStep,onSelectRequirements}) => {
                         <h1 className="quiz_title">Security Requirements</h1>
                         <div className="row">
                             <MultiSelectBox
-                                options={securityRequirements}
+                                options={requirements}
                                 labelKey="desc"
                                 valueKey="value"
                                 onAdd={selectedItem => {
