@@ -4,12 +4,48 @@ import 'react-multiselect-box/build/css/index.css'
 import * as d3 from "d3";
 import data from "./requirements.csv";
 
+const StudentFilter = ({updateSearch, searchText}) => {
+
+    function handleChange(event) {
+        updateSearch(event.target.value);
+    }
+
+    return (
+        <input type="text" placeholder="Find a student" className="input-search" onChange={handleChange}
+               value={searchText}/>
+    )
+}
+
+const Student = ({name}) => <li className="student-item">{name}</li>;
+
+const StudentList = ({students, filter}) => {
+    function filterStudents(students) {
+        if (!filter) {
+            return students
+        }
+        return students.filter((student) => student.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
+    }
+
+    return (
+        <ul className="student-list">
+            {filterStudents(students)
+                .map((student) => <Student name={student}/>)}
+        </ul>
+    )
+};
 const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
     const [state, setState] = useState({
-        selectedOne: [],
         requirements: []
     });
+    const [students, setStudents] = useState(['Elia Larkey', 'Joyce Bearce', 'Clint Strahan',
+        'Maude Defrank', 'Soila Hendren', 'Eliana Carrales',
+        'Marquerite Bettes', 'Mikaela Authement', 'Elyse Toscano',
+        'Ginette Solomon', 'Wanita Sprinkle', 'Yen Hagans',
+        'Annmarie Schaper', 'Gregg Wilkins', 'Eura Prue', 'Addie Madding',
+        'Tameika Murph', 'Keenan Woolsey', 'Hertha Hyer',
+        'Sharan Letsinger']);
+    const [filter, setFilter] = useState(null);
 
     useEffect(() => {
         function readCsv() {
@@ -23,7 +59,12 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
         readCsv()
     }, []);
-    const {selectedOne, requirements} = state;
+
+    function updateSearch(inputValue) {
+        setFilter(inputValue);
+    }
+
+    const {requirements} = state;
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -36,6 +77,11 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                     return <option key={item.value} value={item.value}>{item.desc}</option>
                                 })}
                             </select>
+                            <div className="app">
+                                <h1 className="app__title">Your Students</h1>
+                                <StudentFilter updateSearch={updateSearch} searchText={filter}/>
+                                <StudentList filter={filter} students={students}/>
+                            </div>
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
