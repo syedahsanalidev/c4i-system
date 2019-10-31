@@ -35,7 +35,8 @@ function App() {
             {currentStep === 1 &&
             <CloudServices onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
-            <Services cloudService={cloudService} onSelectService={onSelectService} changeCurrentStep={changeCurrentStep}/>}
+            <Services cloudService={cloudService} onSelectService={onSelectService}
+                      changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 3 &&
             <SecurityRequirements onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 4 && <SummaryChart/>}
