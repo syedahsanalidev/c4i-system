@@ -34,7 +34,7 @@ const Services = ({cloudService, changeCurrentStep}) => {
                                     <div className="quiz_card_area">
                                         <input className="quiz_checkbox"
                                                type="checkbox"
-                                               id={id} defaultValue={id}/>
+                                               id={id} defaultValue={id} disabled/>
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
                                                 <div className="quiz_card_icon">
