@@ -3,7 +3,7 @@ import './cloudservices.css';
 import * as d3 from 'd3';
 import data from './cloudServices.csv';
 
-const CloudServices = ({onSelectCloudService, changeCurrentStep}) => {
+const CloudServices = ({cloudService,onSelectCloudService, changeCurrentStep}) => {
 
     const [cloudServices, setCloudServices] = useState([]);
     useEffect(() => {
@@ -52,7 +52,7 @@ const CloudServices = ({onSelectCloudService, changeCurrentStep}) => {
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(2)}>Continue
+                                <button className="quiz_continueBtn" disabled={cloudService===0} onClick={() => changeCurrentStep(2)}>Continue
                                 </button>
                             </div>
                             {/* end of quiz_next */}

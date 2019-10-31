@@ -33,7 +33,7 @@ function App() {
     return (
         <HomeTemplate>
             {currentStep === 1 &&
-            <CloudServices onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
+            <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
             <Services cloudService={cloudService} onSelectService={onSelectService}
                       changeCurrentStep={changeCurrentStep}/>}
