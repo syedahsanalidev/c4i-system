@@ -16,20 +16,19 @@ const StudentFilter = ({updateSearch, searchText}) => {
     )
 };
 
-const Student = ({name}) => <li className="student-item">{name}</li>;
+const Student = ({student}) => <li className="student-item">{student.questionTitle}</li>;
 
 const StudentList = ({students, filter}) => {
     function filterStudents(students) {
         if (!filter) {
             return students
         }
-        return students.filter((student) => student.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
+        return students.filter((student) => student.questionTitle.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
     }
-
     return (
         <ul className="student-list">
             {filterStudents(students)
-                .map((student) => <Student name={student}/>)}
+                .map((student) => <Student student={student}/>)}
         </ul>
     )
 };
@@ -37,35 +36,36 @@ const StudentList = ({students, filter}) => {
 const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
     const [state, setState] = useState({
-        requirements: []
+        requirements: [],
+        questions:[]
     });
-    const [students, setStudents] = useState(['Elia Larkey', 'Joyce Bearce', 'Clint Strahan',
-        'Maude Defrank', 'Soila Hendren', 'Eliana Carrales',
-        'Marquerite Bettes', 'Mikaela Authement', 'Elyse Toscano',
-        'Ginette Solomon', 'Wanita Sprinkle', 'Yen Hagans',
-        'Annmarie Schaper', 'Gregg Wilkins', 'Eura Prue', 'Addie Madding',
-        'Tameika Murph', 'Keenan Woolsey', 'Hertha Hyer',
-        'Sharan Letsinger']);
-    const [filter, setFilter] = useState(null);
+    const [filter, setFilter] = useState('');
 
     useEffect(() => {
-        function readCsv() {
+        function readCsvForRequirements() {
             d3.csv(data).then(function (response) {
                 response.pop();
-                setState({...state, requirements: response})
+                d3.csv(questionsData).then(function (questionsResponse) {
+                    setState({...state, questions: questionsResponse,requirements: response});
+                }).catch(function (err) {
+                    throw err;
+                })
             }).catch(function (err) {
                 throw err;
             })
         }
 
-        readCsv()
+        readCsvForRequirements();
     }, []);
 
     function updateSearch(inputValue) {
         setFilter(inputValue);
     }
 
-    const {requirements} = state;
+    function handleRequirementChange(event) {
+        onSelectRequirements(event.target.value);
+    }
+    const {requirements,questions} = state;
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -74,18 +74,18 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                         <h1 className="quiz_title">Security Requirements</h1>
                         <div className="row">
                             <div className="col-sm-12 align-center mb-10">
-                                <select>
+                                <select onChange={handleRequirementChange}>
                                     <option value="0">Select Secuirty Requirements</option>
                                     {requirements.map((item) => {
                                         return <option key={item.value} value={item.value}>{item.desc}</option>
                                     })}
                                 </select>
                             </div>
-                            <div className="col-sm-12">
+                            {questions.length>0 && <div className="col-sm-12">
                                 <h1 className="app__title">Questions and Metrices</h1>
                                 <StudentFilter updateSearch={updateSearch} searchText={filter}/>
-                                <StudentList filter={filter} students={students}/>
-                            </div>
+                                <StudentList filter={filter} students={questions}/>
+                            </div>}
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
