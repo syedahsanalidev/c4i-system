@@ -10,6 +10,7 @@ function App() {
     const [state, setState] = useState({
         cloudService: 0,
         requirements: '',
+        networkSecurity:''
     })
 
     function changeCurrentStep(step) {
@@ -24,7 +25,7 @@ function App() {
         setState({...state, requirements: requirementId})
     }
 
-    const {cloudService} = state;
+    const {cloudService,requirements} = state;
     return (
         <HomeTemplate>
             {currentStep === 1 &&
@@ -33,7 +34,7 @@ function App() {
             <Services cloudService={cloudService}
                       changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 3 &&
-            <SecurityRequirements onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
+            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 4 && <SummaryChart/>}
         </HomeTemplate>
     );

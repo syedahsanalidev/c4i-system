@@ -16,10 +16,12 @@ const StudentFilter = ({updateSearch, searchText}) => {
     )
 };
 
-const Student = ({student}) => <tr>
+const Student = ({student}) => <tbody>
+<tr>
     <td className="student-item">{student.questionTitle}</td>
     <td className="student-item">{student.metrices}</td>
-</tr>;
+</tr>
+</tbody>;
 
 const StudentList = ({students, filter}) => {
     function filterStudents(students) {
@@ -31,17 +33,19 @@ const StudentList = ({students, filter}) => {
 
     return (
         <table className="student-list">
+            <thead>
             <tr>
                 <th>Questions</th>
                 <th>Metrices</th>
             </tr>
+            </thead>
             {filterStudents(students)
-                .map((student) => <Student student={student}/>)}
+                .map((student) => <Student key={student.id} student={student}/>)}
         </table>
     )
 };
 
-const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
+const Requirements = ({requirmentId, changeCurrentStep, onSelectRequirements}) => {
 
     const [state, setState] = useState({
         requirements: [],
@@ -71,6 +75,9 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
     }
 
     function handleRequirementChange(event) {
+        const {questions} = state;
+        const filteredQuestions = questions.filter((item) => item.id === event.target.value);
+        setState({...state, questions: filteredQuestions});
         onSelectRequirements(event.target.value);
     }
 
@@ -90,15 +97,18 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                     })}
                                 </select>
                             </div>
-                            {questions.length > 0 && <div className="col-sm-12">
+                            <div className="col-sm-12">
                                 <h1 className="app__title">Questions and Metrices</h1>
-                                <StudentFilter updateSearch={updateSearch} searchText={filter}/>
-                                <StudentList filter={filter} students={questions}/>
-                            </div>}
+                                {(questions.length > 0 && requirmentId) && <>
+                                    <StudentFilter updateSearch={updateSearch}
+                                                   searchText={filter}/>
+                                    <StudentList filter={filter} students={questions}/></>}
+                            </div>
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(4)}>Calculate
+                                <button className="quiz_continueBtn" disabled={requirmentId === '' ? true : false}
+                                        onClick={() => changeCurrentStep(4)}>Calculate
                                 </button>
                             </div>
                             {/* end of quiz_next */}
