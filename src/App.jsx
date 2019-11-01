@@ -4,6 +4,8 @@ import HomeTemplate from './modules/home'
 import SecurityRequirements from './modules/securityRequirements';
 import Services from './modules/services';
 import SummaryChart from './modules/chart';
+import * as d3 from "d3";
+import data from "./csvs/evaluations.csv";
 
 function App() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -11,8 +13,9 @@ function App() {
         cloudService: 0,
         services:[],
         requirements: '',
-        networkSecurity:''
-    })
+        networkSecurity:'',
+        chartData:[]
+    });
 
     function changeCurrentStep(step) {
         setCurrentStep(step)
@@ -31,8 +34,16 @@ function App() {
     }
     
     function calculatePercentage() {
-        const {services}=state;
-        changeCurrentStep(4);
+        function readCsv() {
+            d3.csv(data).then(function (response) {
+                const {services}=state;
+                changeCurrentStep(4);
+                // setCloudServices(response);
+            }).catch(function (err) {
+                throw err;
+            })
+        }
+        readCsv();
     }
 
     const {cloudService,requirements} = state;
@@ -45,7 +56,10 @@ function App() {
                       changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}/>}
             {currentStep === 3 &&
             <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} calculatePercentage={calculatePercentage}/>}
-            {currentStep === 4 && <SummaryChart/>}
+            {currentStep === 4 && <SummaryChart data={[
+                {text: 'Man', value: 50},
+                {text: 'Woman', value: 70}
+            ]}/>}
         </HomeTemplate>
     );
 }
