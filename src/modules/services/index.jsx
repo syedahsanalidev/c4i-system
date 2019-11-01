@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './services.css';
 import * as d3 from 'd3';
-import data from './services.csv';
+import data from '../../csvs/services.csv';
 
 const Services = ({onSelectServices,cloudService, changeCurrentStep}) => {
 

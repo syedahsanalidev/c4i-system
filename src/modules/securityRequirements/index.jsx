@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as d3 from "d3";
-import questionsData from "./questions.csv";
-import data from "./requirements.csv";
+import questionsData from "../../csvs/questions.csv";
+import data from "../../csvs/requirements.csv";
 import './securityRequirements.css'
 
 const StudentFilter = ({updateSearch, searchText}) => {
