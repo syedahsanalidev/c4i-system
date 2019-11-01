@@ -4,7 +4,7 @@ import BarChart from 'react-bar-chart';
 const Chart = ({data}) => {
     const inputRef = useRef(null);
     const [state, setState] = useState({
-        width: 500
+        width: 800
     });
     const margin = {top: 20, right: 20, bottom: 30, left: 40};
 
@@ -20,7 +20,7 @@ const Chart = ({data}) => {
                                 <div style={{width: '50%'}}>
                                     <BarChart ylabel='Percentage'
                                               width={width}
-                                              height={500}
+                                              height={600}
                                               margin={margin}
                                               data={data}/>
                                 </div>

@@ -11,10 +11,10 @@ function App() {
     const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
         cloudService: 0,
-        services:[],
+        services: [],
         requirements: '',
-        networkSecurity:'',
-        chartData:[]
+        networkSecurity: '',
+        chartData: []
     });
 
     function changeCurrentStep(step) {
@@ -32,13 +32,20 @@ function App() {
     function onSelectRequirements(requirementId) {
         setState({...state, requirements: requirementId})
     }
-    
+
     function calculatePercentage() {
         function readCsv() {
             d3.csv(data).then(function (response) {
-                const {services}=state;
+                const tempData = [];
+                const {services} = state;
+                services.forEach((item) => {
+                    const serviceQuestions = response.filter((evaluationItem) => evaluationItem.serviceId === item.id);
+                    const sum=serviceQuestions.reduce((a, b) => parseInt(a) + parseInt((b['score'] || 0)), 0);
+                    const percentage=Math.round((sum/serviceQuestions.length)*100);
+                    tempData.push({text:item.title,value:percentage});
+                });
+                setState({...state,chartData:tempData});
                 changeCurrentStep(4);
-                // setCloudServices(response);
             }).catch(function (err) {
                 throw err;
             })
@@ -46,20 +53,19 @@ function App() {
         readCsv();
     }
 
-    const {cloudService,requirements} = state;
+    const {cloudService, requirements,chartData} = state;
     return (
         <HomeTemplate>
             {currentStep === 1 &&
-            <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
+            <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService}
+                           changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
             <Services cloudService={cloudService}
                       changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}/>}
             {currentStep === 3 &&
-            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} calculatePercentage={calculatePercentage}/>}
-            {currentStep === 4 && <SummaryChart data={[
-                {text: 'Man', value: 50},
-                {text: 'Woman', value: 70}
-            ]}/>}
+            <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}
+                                  calculatePercentage={calculatePercentage}/>}
+            {currentStep === 4 && <SummaryChart data={chartData}/>}
         </HomeTemplate>
     );
 }
