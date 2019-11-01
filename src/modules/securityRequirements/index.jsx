@@ -11,7 +11,7 @@ const StudentFilter = ({updateSearch, searchText}) => {
     }
 
     return (
-        <input type="text" placeholder="Find a student" className="input-search" onChange={handleChange}
+        <input type="text" placeholder="Search here for Questions" className="input-search" onChange={handleChange}
                value={searchText}/>
     )
 };
@@ -89,7 +89,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(4)}>Continue
+                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(4)}>Calculate
                                 </button>
                             </div>
                             {/* end of quiz_next */}
