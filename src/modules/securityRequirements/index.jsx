@@ -16,7 +16,10 @@ const StudentFilter = ({updateSearch, searchText}) => {
     )
 };
 
-const Student = ({student}) => <li className="student-item">{student.questionTitle}</li>;
+const Student = ({student}) => <tr>
+    <td className="student-item">{student.questionTitle}</td>
+    <td className="student-item">{student.metrices}</td>
+</tr>;
 
 const StudentList = ({students, filter}) => {
     function filterStudents(students) {
@@ -25,11 +28,16 @@ const StudentList = ({students, filter}) => {
         }
         return students.filter((student) => student.questionTitle.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
     }
+
     return (
-        <ul className="student-list">
+        <table className="student-list">
+            <tr>
+                <th>Questions</th>
+                <th>Metrices</th>
+            </tr>
             {filterStudents(students)
                 .map((student) => <Student student={student}/>)}
-        </ul>
+        </table>
     )
 };
 
@@ -37,7 +45,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
     const [state, setState] = useState({
         requirements: [],
-        questions:[]
+        questions: []
     });
     const [filter, setFilter] = useState('');
 
@@ -46,7 +54,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
             d3.csv(data).then(function (response) {
                 response.pop();
                 d3.csv(questionsData).then(function (questionsResponse) {
-                    setState({...state, questions: questionsResponse,requirements: response});
+                    setState({...state, questions: questionsResponse, requirements: response});
                 }).catch(function (err) {
                     throw err;
                 })
@@ -65,7 +73,8 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
     function handleRequirementChange(event) {
         onSelectRequirements(event.target.value);
     }
-    const {requirements,questions} = state;
+
+    const {requirements, questions} = state;
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -81,7 +90,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                     })}
                                 </select>
                             </div>
-                            {questions.length>0 && <div className="col-sm-12">
+                            {questions.length > 0 && <div className="col-sm-12">
                                 <h1 className="app__title">Questions and Metrices</h1>
                                 <StudentFilter updateSearch={updateSearch} searchText={filter}/>
                                 <StudentList filter={filter} students={questions}/>
