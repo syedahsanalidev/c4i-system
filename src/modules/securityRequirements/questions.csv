@@ -1,0 +1,2 @@
+id,questionTitle,metrices,score,requirementId
+1,Do any CSP controlled accounts have cloud-wide privileges?,Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.,1,1xs
