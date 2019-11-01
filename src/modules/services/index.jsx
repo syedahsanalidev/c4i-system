@@ -3,7 +3,7 @@ import './services.css';
 import * as d3 from 'd3';
 import data from './services.csv';
 
-const Services = ({cloudService, changeCurrentStep}) => {
+const Services = ({onSelectServices,cloudService, changeCurrentStep}) => {
 
     const [services, setServices] = useState([]);
 
@@ -14,6 +14,7 @@ const Services = ({cloudService, changeCurrentStep}) => {
                     return item.cloudServiceId === cloudService;
                 });
                 setServices(filteredData);
+                onSelectServices(filteredData)
             }).catch(function (err) {
                 throw err;
             })

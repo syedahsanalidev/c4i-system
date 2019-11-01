@@ -31,6 +31,7 @@ function App() {
     }
     
     function calculatePercentage() {
+        const {services}=state;
         changeCurrentStep(4);
     }
 
@@ -41,7 +42,7 @@ function App() {
             <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
             <Services cloudService={cloudService}
-                      changeCurrentStep={changeCurrentStep}/>}
+                      changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}/>}
             {currentStep === 3 &&
             <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} calculatePercentage={calculatePercentage}/>}
             {currentStep === 4 && <SummaryChart/>}
