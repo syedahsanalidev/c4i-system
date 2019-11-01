@@ -45,7 +45,7 @@ const StudentList = ({students, filter}) => {
     )
 };
 
-const Requirements = ({requirmentId, changeCurrentStep, onSelectRequirements}) => {
+const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements}) => {
 
     const [state, setState] = useState({
         requirements: [],
@@ -108,7 +108,7 @@ const Requirements = ({requirmentId, changeCurrentStep, onSelectRequirements}) =
                         <div className="col-sm-12">
                             <div className="quiz_next">
                                 <button className="quiz_continueBtn" disabled={requirmentId === '' ? true : false}
-                                        onClick={() => changeCurrentStep(4)}>Calculate
+                                        onClick={() => calculatePercentage()}>Calculate
                                 </button>
                             </div>
                             {/* end of quiz_next */}

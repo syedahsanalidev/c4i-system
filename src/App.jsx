@@ -9,6 +9,7 @@ function App() {
     const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
         cloudService: 0,
+        services:[],
         requirements: '',
         networkSecurity:''
     })
@@ -21,8 +22,16 @@ function App() {
         setState({...state, cloudService: cloudServiceId})
     }
 
+    function onSelectServices(serviceArray) {
+        setState({...state, services: serviceArray})
+    }
+
     function onSelectRequirements(requirementId) {
         setState({...state, requirements: requirementId})
+    }
+    
+    function calculatePercentage() {
+        changeCurrentStep(4);
     }
 
     const {cloudService,requirements} = state;
@@ -34,7 +43,7 @@ function App() {
             <Services cloudService={cloudService}
                       changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 3 &&
-            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
+            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} calculatePercentage={calculatePercentage}/>}
             {currentStep === 4 && <SummaryChart/>}
         </HomeTemplate>
     );
