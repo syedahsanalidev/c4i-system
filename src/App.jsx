@@ -9,7 +9,6 @@ function App() {
     const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
         cloudService: 0,
-        service: '',
         requirements: '',
     })
 
@@ -19,10 +18,6 @@ function App() {
 
     function onSelectCloudService(cloudServiceId) {
         setState({...state, cloudService: cloudServiceId})
-    }
-
-    function onSelectService(serviceId) {
-        setState({...state, service: serviceId})
     }
 
     function onSelectRequirements(requirementId) {
@@ -35,7 +30,7 @@ function App() {
             {currentStep === 1 &&
             <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
-            <Services cloudService={cloudService} onSelectService={onSelectService}
+            <Services cloudService={cloudService}
                       changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 3 &&
             <SecurityRequirements onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
