@@ -76,7 +76,7 @@ const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements})
 
     function handleRequirementChange(event) {
         const {questions} = state;
-        const filteredQuestions = questions.filter((item) => item.id === event.target.value);
+        const filteredQuestions = questions.filter((item) => item.requirementId === event.target.value);
         setState({...state, questions: filteredQuestions});
         onSelectRequirements(event.target.value);
     }

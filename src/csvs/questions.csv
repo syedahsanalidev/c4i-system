@@ -1,2 +1,15 @@
 id,questionTitle,metrices,requirementId
 1,Do any CSP controlled accounts have cloud-wide privileges?,Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.,1
+2,"How does the CSP manage user authentication?","Name, password, token, ID, biometric ( finger print, voice)",1
+3,Does the CSP use multifactor access controls? Which one.,"Yes / No. Google auth, OTP, Email etc.",1
+4,"Does the CSP enforce privilege separation (for instance, RBAC)?","Yes / No. User or role based or group base with least privilege principle or other means.",1
+5,"Does the CSP grant tenants or users administrator privileges? If so, what is the level of access?","Yes / No. Level of access defined for tenant’s users.",1
+6,"Does the CSP verify user identity at registration, and if so, are there different levels of checks depending on resources to which access is granted?","Yes / No. Number of resource access and level of use as access profile for every user",1
+7,"How are the credentials and accounts de-provisioned?","Subjective description of the process for de-provisioning users accounts.",1
+8,"Does this amalgamate identity management?","Yes / No",1
+9,"Is the CSP’s system interoperable with third party identity provider systems?","No of third party identity provider.",1
+10,"Can a customer incorporate single sign on?","Yes / No",1
+11,"No of fail attempt to lock user account?","Total failed login attempts for a specific user.",1
+12,"Can a customer interact with the CSP via an API?","Yes / No. Level of access granted via API",1
+13,"Can a customer use a cloud management interface?","Yes / No. When remote Management is allowed by CSP.",1
+14,"Do any CSP controlled accounts have cloud-wide privileges?","Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.",1
