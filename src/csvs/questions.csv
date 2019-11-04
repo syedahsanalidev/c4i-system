@@ -24,4 +24,26 @@ id,questionTitle,metrices,requirementId
 23,"Are the identified vulnerabilities tracked and addressed?","Yes / No",2
 24,"Is vulnerability information made available to customers?","List the vulnerabilities found and patches released and implemented.",2
 25,"Does the CSP allow customers to perform vulnerability testing against the customer’s own VMs or other containers?","Yes / No. ",2
-26,"Do any CSP controlled accounts have cloud-wide privileges?","Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.",2
+26,"Are customer VMs encrypted and/or otherwise protected in storage?","Yes / No. Mention the Encryption mechanisms. ",3
+27,"Are VM images patched before they are provisioned?","Yes / No. Description of the patches are to be released.",3
+28,"What is the frequency of VM images patching after being provisioned?","Daily / weekly / Monthly / Yearly ",3
+29,"To which standards or guidelines are VM images hardened while being provisioned?","List the standards used.",3
+30,"What are the procedures and practices for protecting hardened and patched VM images?","List and subjective report of the procedures of security.",3
+31,"Can customers provide their own VM image?","Yes / No",3
+32,"Does the CSP include any authentication credentials, and if so, what are their level of use?","Yes / No.Level in numbers from 0 to 5.",3
+33,"Do hardened and patched VM images include operating firewall instances by default?","Yes / No. Mention the type of firewall used in images.",3
+34,"Do hardened and patched VM images include operating IDS or intrusion prevention systems (IPS) by default?","Yes / No. Mention the type of IDS/ IPS used in the images.",3
+35,"If so, does the CSP have access to these in operation?","Yes / No. Mention the level of the access.",3
+36,"Do hardened and patched VM images include any form of network, performance, or security instrumentation that the CSP or tenant has access to?","Yes / No. Mention the level of the access.",3
+37,"Is isolation ensured between server co-located VMs for different customers?","Yes / No. Subjective description of isolation mechanism to be provided.",3
+38,"Is communication implemented between VMs for the same customer?","Yes / No. ",3
+39,"Is security ensured for user data in storage systems?","Yes / No. Description of the encryption mechanism to be shared.",3
+40,"Is security ensured for user data in motion between storage systems and customer VMs?","Encryption on data transit between storage and VMs.",3
+41,"Is security ensured for user data and user interaction between a VM and a non-cloud user system?","Encryption on data transit with outside users. TLS etc.",3
+42,"Does the CSP isolate multitenant applications hosted on shared resources?","Yes / No",4
+43,"How does the CSP isolate a user’s or tenant’s data?","Location where it store and access control techniques.",4
+44,"How does the CSP identify new security vulnerabilities in applications and within the cloud infrastructure?","List the pen-testing techniques and procedures.",4
+45,"Does the CSP provide security as a service features for PaaS (such as authentication, single sign on, authorization, and transport security)?","Yes / No.",4
+46,"What administrative controls are provided by CSP to a tenant/user and do these support define access controls by other users?","Subjective description of administrative controls.",4
+47,"Does the CSP provide separate test and production environments for customers?","Yes / No.",4
+47,"Do any CSP controlled accounts have cloud-wide privileges?","Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.",5
