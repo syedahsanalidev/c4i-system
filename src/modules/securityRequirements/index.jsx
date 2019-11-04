@@ -56,7 +56,7 @@ const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements})
     useEffect(() => {
         function readCsvForRequirements() {
             d3.csv(data).then(function (response) {
-                response.pop();
+                // response.pop();
                 d3.csv(questionsData).then(function (questionsResponse) {
                     setState({...state, questions: questionsResponse, requirements: response});
                 }).catch(function (err) {

@@ -46,4 +46,12 @@ id,questionTitle,metrices,requirementId
 45,"Does the CSP provide security as a service features for PaaS (such as authentication, single sign on, authorization, and transport security)?","Yes / No.",4
 46,"What administrative controls are provided by CSP to a tenant/user and do these support define access controls by other users?","Subjective description of administrative controls.",4
 47,"Does the CSP provide separate test and production environments for customers?","Yes / No.",4
-47,"Do any CSP controlled accounts have cloud-wide privileges?","Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.",5
+48,"How does the CSP protect keys and what are the security controls in place to effect that?","Cryptographic algorithm, algorithm to generate key, key length",5
+49,"Are hardware security modules used to protect such keys?","Yes / No. Subjective evaluation of the hardware security modules",5
+50,"Which user has access to such keys?","Users and roles types explained.",5
+51,"How those keys protected for sign and encrypt operations?","Key signing and encryption through application or by other means, location with encrypted or plain text for store, appropriate access control mechanism.",5
+52,"Are procedures in place to manage and recover from the compromise of keys?","Yes / No. SOP for recovering keys are explained.",5
+53,"Is key revocation performed in a cloud-wide atomic-operation?","Yes / No",5
+54,"Is encryption used for operations performed?","Yes / No. State the encryption mechanism used.",5
+55,"How random number consider for cryptographic keys or for other purposes?","Source of random numbers, Seed and entropy size by number of bits.",5
+56,"Does security policy clearly define what must be encrypted?","Yes / No.",5
