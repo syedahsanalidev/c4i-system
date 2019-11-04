@@ -12,4 +12,16 @@ id,questionTitle,metrices,requirementId
 11,"No of fail attempt to lock user account?","Total failed login attempts for a specific user.",1
 12,"Can a customer interact with the CSP via an API?","Yes / No. Level of access granted via API",1
 13,"Can a customer use a cloud management interface?","Yes / No. When remote Management is allowed by CSP.",1
-14,"Do any CSP controlled accounts have cloud-wide privileges?","Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.",1
+14,"What controls are in place to manage external and internal attacks, including distributed denial of service (DDoS) attack?","Define controls and mitigation techniques to protect from such attacks.",2
+15,"For customers, is isolation managed between VMs at the hypervisor level?","Yes / No. Level of isolation logical /physical explained.",2
+16,"For customers, is isolation managed between VMs by network hardware and routing?","Yes / No",2
+17,"Are standards or best practices used to implement virtual network infrastructure?","Subjective description of standards used for virtual networks.",2
+18,"Are MAC spoofing, ARP poisoning, and so on protected against?","List protections made.",2
+19,"Is the isolation managed between customer accessed/routable systems and cloud management systems and infrastructure?","Yes / No. Type of isolation logical /virtual.",2
+20,"Does the CSP perform periodic penetration testing against the cloud?","List the name of tests and standards",2
+21,"If so, is penetration testing done both from external to the cloud and from inside the cloud and the cloud infrastructure?","Yes / No for both external and internal tests performed.",2
+22,"Does the CSP perform vulnerability testing of the cloud infrastructure, cloud management, and also customer accessible components?","Yes / No. List the tests and share results of the tests performed.",2
+23,"Are the identified vulnerabilities tracked and addressed?","Yes / No",2
+24,"Is vulnerability information made available to customers?","List the vulnerabilities found and patches released and implemented.",2
+25,"Does the CSP allow customers to perform vulnerability testing against the customer’s own VMs or other containers?","Yes / No. ",2
+26,"Do any CSP controlled accounts have cloud-wide privileges?","Yes. The root/admin account has cloud-wide privileges. Also state the operations that are allowed like read write operations etc.",2
