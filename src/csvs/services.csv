@@ -1,8 +1,8 @@
 id,title,cloudServiceId
-1,GSuit,1
-2,dropbox,1
-3,adobe creative cloud,1
-4,salforce,1
+1,Amazon,1
+2,Google,1
+3,IBM,1
+4,Oracle,1
 5,AwS elastic bean stalks,2
 6,windows azure,2
 7,google app engine,2
