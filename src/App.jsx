@@ -37,10 +37,11 @@ function App() {
         function readCsv() {
             d3.csv(data).then(function (response) {
                 const tempData = [];
-                const {services} = state;
+                const {services,requirements} = state;
                 services.forEach((item) => {
-                    const serviceQuestions = response.filter((evaluationItem) => evaluationItem.serviceId === item.id);
-                    const sum=serviceQuestions.reduce((a, b) => parseInt(a) + parseInt((b['score'] || 0)), 0);
+                    const requirementQuestions = response.filter((evaluationItem) =>evaluationItem.requirementId === requirements);
+                    const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.serviceId === item.id);
+                    const sum=serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
                     const percentage=Math.round((sum/serviceQuestions.length)*100);
                     tempData.push({text:item.title,value:percentage});
                 });
