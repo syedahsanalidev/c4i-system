@@ -1,86 +1,39 @@
 import React, {useEffect, useState} from 'react';
+import MultiSelectBox from 'react-multiselect-box'
+import 'react-multiselect-box/build/css/index.css'
 import * as d3 from "d3";
-import questionsData from "../../csvs/questions.csv";
-import data from "../../csvs/requirements.csv";
-import './securityRequirements.css'
+import data from "./../../csvs/requirements.csv";
 
-const StudentFilter = ({updateSearch, searchText}) => {
-
-    function handleChange(event) {
-        updateSearch(event.target.value);
-    }
-
-    return (
-        <input type="text" placeholder="Search here for Questions" className="input-search" onChange={handleChange}
-               value={searchText}/>
-    )
-};
-
-const Student = ({student}) => <tbody>
-<tr>
-    <td className="student-item">{student.questionTitle}</td>
-    <td className="student-item">{student.metrices}</td>
-</tr>
-</tbody>;
-
-const StudentList = ({students, filter}) => {
-    function filterStudents(students) {
-        if (!filter) {
-            return students
-        }
-        return students.filter((student) => student.questionTitle.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
-    }
-
-    return (
-        <table className="student-list">
-            <thead>
-            <tr>
-                <th>Questions</th>
-                <th>Metrices</th>
-            </tr>
-            </thead>
-            {filterStudents(students)
-                .map((student) => <Student key={student.id} student={student}/>)}
-        </table>
-    )
-};
-
-const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements}) => {
+const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
     const [state, setState] = useState({
-        requirements: [],
-        questions: []
+        selectedOne: [],
+        requirements: []
     });
-    const [filter, setFilter] = useState('');
 
     useEffect(() => {
-        function readCsvForRequirements() {
+        function readCsv() {
             d3.csv(data).then(function (response) {
-                d3.csv(questionsData).then(function (questionsResponse) {
-                    setState({...state, questions: questionsResponse, requirements: response});
-                }).catch(function (err) {
-                    throw err;
-                })
+                delete response["columns"];
+                // console.log(response);
+                // response.pop();
+                setState({...state, requirements: response})
             }).catch(function (err) {
                 throw err;
             })
         }
 
-        readCsvForRequirements();
+        readCsv()
     }, []);
-
-    function updateSearch(inputValue) {
-        setFilter(inputValue);
-    }
-
-    function handleRequirementChange(event) {
-        const {questions} = state;
-        const filteredQuestions = questions.filter((item) => item.requirementId === event.target.value);
-        setState({...state, questions: filteredQuestions});
-        onSelectRequirements(event.target.value);
-    }
-
-    const {requirements, questions} = state;
+    const securityRequirements = [
+        {desc: 'Confidently', value: '1'},
+        {desc: 'Integrity', value: '2'},
+        {desc: 'Accountability', value: '3'},
+        {desc: 'Availability', value: '4'},
+        {desc: 'System Configuration', value: '5'},
+    ];
+    const {selectedOne, requirements} = state;
+    // return
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -88,26 +41,43 @@ const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements})
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Security Requirements</h1>
                         <div className="row">
-                            <div className="col-sm-12 align-center mb-10">
-                                <select onChange={handleRequirementChange}>
-                                    <option value="0">Select Secuirty Requirements</option>
-                                    {requirements.map((item) => {
-                                        return <option key={item.value} value={item.value}>{item.desc}</option>
-                                    })}
-                                </select>
-                            </div>
-                            <div className="col-sm-12">
-                                <h1 className="app__title">Questions and Metrices</h1>
-                                {(questions.length > 0 && requirmentId) && <>
-                                    <StudentFilter updateSearch={updateSearch}
-                                                   searchText={filter}/>
-                                    <StudentList filter={filter} students={questions}/></>}
-                            </div>
+                            <MultiSelectBox
+                                options={securityRequirements}
+                                labelKey="desc"
+                                valueKey="value"
+                                onAdd={selectedItem => {
+                                    setState({
+                                        selectedOne: [...state.selectedOne, selectedItem.value]
+                                    })
+                                }}
+                                onRemove={(removedItem, index) => {
+                                    setState({
+                                        selectedOne: [
+                                            ...state.selectedOne.filter(
+                                                item => item !== removedItem.value
+                                            )
+                                        ]
+                                    })
+                                }}
+                                onSelectAll={selectedItems => {
+                                    setState({
+                                        selectedOne: [
+                                            ...state.selectedOne,
+                                            ...selectedItems.map(item => item.value)
+                                        ]
+                                    })
+                                }}
+                                onRemoveAll={() => {
+                                    setState({
+                                        selectedOne: []
+                                    })
+                                }}
+                                valueArray={selectedOne}
+                            />
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" disabled={requirmentId === '' ? true : false}
-                                        onClick={() => calculatePercentage()}>Calculate
+                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(4)}>Continue
                                 </button>
                             </div>
                             {/* end of quiz_next */}
@@ -124,5 +94,4 @@ const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements})
         {/* end of container */}
     </section>
 };
-
 export default Requirements;
