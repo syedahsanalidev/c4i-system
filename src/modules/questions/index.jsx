@@ -55,7 +55,6 @@ const Requirements = ({title, requirmentId, calculatePercentage}) => {
     useEffect(() => {
         function readCsvForRequirements() {
             d3.csv(questionsData).then(function (questionsResponse) {
-                debugger
                 const filteredQuestions = questionsResponse.filter((item) => item.requirementId === requirmentId);
                 setState({...state, questions: filteredQuestions});
             }).catch(function (err) {
