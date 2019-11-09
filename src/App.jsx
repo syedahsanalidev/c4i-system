@@ -4,6 +4,7 @@ import HomeTemplate from './modules/home'
 import SecurityRequirements from './modules/securityRequirements';
 import Services from './modules/services';
 import SummaryChart from './modules/chart';
+import Questions from './modules/questions'
 import * as d3 from "d3";
 import data from "./csvs/evaluations.csv";
 
@@ -56,10 +57,11 @@ function App() {
                 throw err;
             })
         }
+
         readCsv();
     }
 
-    const {cloudService, requirements,chartData} = state;
+    const {cloudService, requirements, chartData} = state;
     return (
         <HomeTemplate>
             {currentStep === 1 &&
@@ -71,8 +73,11 @@ function App() {
                       onSelectServiceExample={onSelectServiceExample}/>}
             {currentStep === 3 &&
             <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}
-                                  calculatePercentage={calculatePercentage}/>}
-            {currentStep === 4 && <SummaryChart data={chartData}/>}
+                                  calculatePercentage={calculatePercentage} changeCurrentStep={changeCurrentStep}/>}
+            {currentStep === 4 &&
+            <Questions requirmentId={'1'} title={'Identity and Access Management'}
+                       calculatePercentage={calculatePercentage}/>}
+            {currentStep === 5 && <SummaryChart data={chartData}/>}
         </HomeTemplate>
     );
 }
