@@ -38,6 +38,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                 valueKey="value"
                                 onAdd={selectedItem => {
                                     setState({...state,selectedOne: [...state.selectedOne, selectedItem.value]})
+                                    onSelectRequirements([...state.selectedOne, selectedItem.value]);
                                 }}
                                 onRemove={(removedItem, index) => {
                                     setState({...state,
@@ -46,7 +47,12 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                                 item => item !== removedItem.value
                                             )
                                         ]
-                                    })
+                                    });
+                                    onSelectRequirements([
+                                        ...state.selectedOne.filter(
+                                            item => item !== removedItem.value
+                                        )
+                                    ])
                                 }}
                                 onSelectAll={selectedItems => {
                                     setState({...state,
@@ -54,12 +60,17 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                             ...state.selectedOne,
                                             ...selectedItems.map(item => item.value)
                                         ]
-                                    })
+                                    });
+                                    onSelectRequirements([
+                                        ...state.selectedOne,
+                                        ...selectedItems.map(item => item.value)
+                                    ]);
                                 }}
                                 onRemoveAll={() => {
                                     setState({...state,
                                         selectedOne: []
                                     })
+                                    onSelectRequirements([]);
                                 }}
                                 valueArray={selectedOne}
                             />

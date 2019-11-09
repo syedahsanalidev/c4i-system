@@ -32,8 +32,8 @@ function App() {
         setState({...state, serviceExample: serviceExampleId})
     }
 
-    function onSelectRequirements(requirementId) {
-        setState({...state, requirements: requirementId})
+    function onSelectRequirements(requirements) {
+        setState({...state, requirements: requirements})
     }
 
     function calculatePercentage() {
@@ -60,7 +60,6 @@ function App() {
     const {cloudService, requirements, chartData, serviceExample, currentStep} = state;
     return (
         <HomeTemplate>
-
             {step === 1 &&
             <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService}/>}
             {step === 2 &&
@@ -68,8 +67,7 @@ function App() {
                       onSelectServices={onSelectServices}
                       onSelectServiceExample={onSelectServiceExample}/>}
             {step === 3 &&
-            <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}
-                                  calculatePercentage={calculatePercentage}/>}
+            <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}/>}
             {step === 4 &&
             <Questions requirmentId={'1'} title={'Identity and Access Management'}
                        calculatePercentage={calculatePercentage}/>}
