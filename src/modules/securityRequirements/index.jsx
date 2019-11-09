@@ -7,7 +7,7 @@ import Navigation from "../navigation";
 import context from './../navigation/context';
 
 const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
-    const {setPages} = useContext(context);
+    const {pages,setPages} = useContext(context);
     const [state, setState] = useState({
         selectedOne: [],
         requirements: []
@@ -41,6 +41,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                     const selected = [...state.selectedOne, selectedItem.value];
                                     setState({...state, selectedOne: selected})
                                     onSelectRequirements(selected);
+                                    setPages(pages+1);
                                 }}
                                 onRemove={(removedItem, index) => {
                                     const selected = [
@@ -53,6 +54,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                         selectedOne: selected
                                     });
                                     onSelectRequirements(selected);
+                                    setPages(pages-1);
                                 }}
                                 onSelectAll={selectedItems => {
                                     const selected = [
@@ -64,6 +66,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                         selectedOne: selected
                                     });
                                     onSelectRequirements(selected);
+                                    setPages(pages+selected.length);
                                 }}
                                 onRemoveAll={() => {
                                     setState({
@@ -71,6 +74,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                         selectedOne: []
                                     });
                                     onSelectRequirements([]);
+                                    setPages(3);
                                 }}
                                 valueArray={selectedOne}
                             />

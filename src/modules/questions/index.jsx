@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import questionsData from "../../csvs/questions.csv";
 import data from "../../csvs/requirements.csv";
 import './questions.css'
+import Navigation from "../navigation";
 
 const StudentFilter = ({updateSearch, searchText}) => {
 
@@ -86,14 +87,7 @@ const Requirements = ({title, requirmentId, calculatePercentage}) => {
                                     <StudentList filter={filter} students={questions}/></>}
                             </div>
                         </div>
-                        <div className="col-sm-12">
-                            <div className="quiz_next">
-                                <button className="quiz_continueBtn" disabled={requirmentId === '' ? true : false}
-                                        onClick={() => calculatePercentage()}>Calculate
-                                </button>
-                            </div>
-                            {/* end of quiz_next */}
-                        </div>
+                        <Navigation/>
                         {/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>
