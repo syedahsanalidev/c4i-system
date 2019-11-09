@@ -37,7 +37,6 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                 labelKey="desc"
                                 valueKey="value"
                                 onAdd={selectedItem => {
-                                    // debugger
                                     setState({...state,selectedOne: [...state.selectedOne, selectedItem.value]})
                                 }}
                                 onRemove={(removedItem, index) => {
