@@ -1,12 +1,22 @@
 id,title,cloudServiceId
-1,Amazon,1
-2,Google,1
-3,IBM,1
-4,Oracle,1
-5,AwS elastic bean stalks,2
-6,windows azure,2
-7,google app engine,2
-8,Amazon Web Services (AWS),3
-9,Cisco Metapod,3
-10,Microsoft Azure,3
-11,Google Compute Engine (GCE),3
+1,Hosted email,1
+2,Simple file sharing,1
+3,human capital management,1
+4,Web conferencing,1
+5,Industry Solutions,1
+6,Block-Chain Cloud Service,1
+7,Cloud Identity,1
+8,Productivity software,1
+9,AI and machine learning application,1
+10,Intranet Team Sites,1
+11,Application development,2
+12,API development and management,2
+13,Big data,2
+14,Data management and analytics,2
+15,Management services,2
+16,identity and security solution,2
+17,IOT application,2
+18,Storage,3
+19,Networking,3
+20,Database,3
+21,Virtual machine,3
