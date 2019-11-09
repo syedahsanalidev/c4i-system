@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import MultiSelectBox from 'react-multiselect-box'
 import 'react-multiselect-box/build/css/index.css'
 import * as d3 from "d3";
 import data from "./../../csvs/requirements.csv";
 import Navigation from "../navigation";
+import context from './../navigation/context';
 
 const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
-
+    const {setPages} = useContext(context);
     const [state, setState] = useState({
         selectedOne: [],
         requirements: []
@@ -37,39 +38,38 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                 labelKey="desc"
                                 valueKey="value"
                                 onAdd={selectedItem => {
-                                    setState({...state,selectedOne: [...state.selectedOne, selectedItem.value]})
-                                    onSelectRequirements([...state.selectedOne, selectedItem.value]);
+                                    const selected = [...state.selectedOne, selectedItem.value];
+                                    setState({...state, selectedOne: selected})
+                                    onSelectRequirements(selected);
                                 }}
                                 onRemove={(removedItem, index) => {
-                                    setState({...state,
-                                        selectedOne: [
-                                            ...state.selectedOne.filter(
-                                                item => item !== removedItem.value
-                                            )
-                                        ]
-                                    });
-                                    onSelectRequirements([
+                                    const selected = [
                                         ...state.selectedOne.filter(
                                             item => item !== removedItem.value
                                         )
-                                    ])
+                                    ];
+                                    setState({
+                                        ...state,
+                                        selectedOne: selected
+                                    });
+                                    onSelectRequirements(selected);
                                 }}
                                 onSelectAll={selectedItems => {
-                                    setState({...state,
-                                        selectedOne: [
-                                            ...state.selectedOne,
-                                            ...selectedItems.map(item => item.value)
-                                        ]
-                                    });
-                                    onSelectRequirements([
+                                    const selected = [
                                         ...state.selectedOne,
                                         ...selectedItems.map(item => item.value)
-                                    ]);
+                                    ];
+                                    setState({
+                                        ...state,
+                                        selectedOne: selected
+                                    });
+                                    onSelectRequirements(selected);
                                 }}
                                 onRemoveAll={() => {
-                                    setState({...state,
+                                    setState({
+                                        ...state,
                                         selectedOne: []
-                                    })
+                                    });
                                     onSelectRequirements([]);
                                 }}
                                 valueArray={selectedOne}
