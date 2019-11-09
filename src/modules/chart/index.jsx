@@ -1,14 +1,7 @@
 import React, {useState, useRef} from 'react';
-import BarChart from 'react-bar-chart';
+import { Chart } from "react-google-charts";
 
-const Chart = ({data}) => {
-    const inputRef = useRef(null);
-    const [state, setState] = useState({
-        width: 800
-    });
-    const margin = {top: 20, right: 20, bottom: 30, left: 40};
-
-    const {width} = state;
+const ChartComponent = ({data}) => {
     return (<section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -16,15 +9,28 @@ const Chart = ({data}) => {
                     <div className="quiz_content_area">
                         <h1 className="quiz_title">Recommended Service Provider</h1>
                         <div className="row">
-                            <div ref={inputRef}>
-                                <div style={{width: '50%'}}>
-                                    <BarChart ylabel='Percentage'
-                                              width={width}
-                                              height={600}
-                                              margin={margin}
-                                              data={data}/>
-                                </div>
-                            </div>
+                            <Chart
+                                width={'500px'}
+                                height={'300px'}
+                                chartType="Bar"
+                                loader={<div>Loading Chart</div>}
+                                data={[
+                                    ['Year', 'Sales', 'Expenses', 'Profit'],
+                                    ['2014', 1000, 400, 200],
+                                    ['2015', 1170, 460, 250],
+                                    ['2016', 660, 1120, 300],
+                                    ['2017', 1030, 540, 350],
+                                ]}
+                                options={{
+                                    // Material design options
+                                    chart: {
+                                        title: 'Company Performance',
+                                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                    },
+                                }}
+                                // For tests
+                                rootProps={{ 'data-testid': '2' }}
+                            />
                         </div>
                         {/* end of quiz_card_area */}
                     </div>
@@ -43,5 +49,5 @@ const Chart = ({data}) => {
         {/* end of container */}
     </section>)
 };
-export default Chart;
+export default ChartComponent;
 
