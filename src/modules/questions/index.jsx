@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import * as d3 from "d3";
 import questionsData from "../../csvs/questions.csv";
 import data from "../../csvs/requirements.csv";
-import './securityRequirements.css'
+import './questions.css'
 
 const StudentFilter = ({updateSearch, searchText}) => {
 
@@ -45,22 +45,19 @@ const StudentList = ({students, filter}) => {
     )
 };
 
-const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements}) => {
+const Requirements = ({title, requirmentId, calculatePercentage}) => {
 
     const [state, setState] = useState({
-        requirements: [],
         questions: []
     });
     const [filter, setFilter] = useState('');
 
     useEffect(() => {
         function readCsvForRequirements() {
-            d3.csv(data).then(function (response) {
-                d3.csv(questionsData).then(function (questionsResponse) {
-                    setState({...state, questions: questionsResponse, requirements: response});
-                }).catch(function (err) {
-                    throw err;
-                })
+            d3.csv(questionsData).then(function (questionsResponse) {
+                debugger
+                const filteredQuestions = questionsResponse.filter((item) => item.requirementId === requirmentId);
+                setState({...state, questions: filteredQuestions});
             }).catch(function (err) {
                 throw err;
             })
@@ -73,29 +70,15 @@ const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements})
         setFilter(inputValue);
     }
 
-    function handleRequirementChange(event) {
-        const {questions} = state;
-        const filteredQuestions = questions.filter((item) => item.requirementId === event.target.value);
-        setState({...state, questions: filteredQuestions});
-        onSelectRequirements(event.target.value);
-    }
-
     const {requirements, questions} = state;
+    console.log(questions)
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
                 <div className="col-sm-12" style={{marginTop: "10px"}}>
                     <div className="quiz_content_area">
-                        <h1 className="quiz_title">Security Requirements</h1>
+                        <h1 className="quiz_title">{title}</h1>
                         <div className="row">
-                            <div className="col-sm-12 align-center mb-10">
-                                <select onChange={handleRequirementChange}>
-                                    <option value="0">Select Secuirty Requirements</option>
-                                    {requirements.map((item) => {
-                                        return <option key={item.value} value={item.value}>{item.desc}</option>
-                                    })}
-                                </select>
-                            </div>
                             <div className="col-sm-12">
                                 <h1 className="app__title">Questions and Metrices</h1>
                                 {(questions.length > 0 && requirmentId) && <>
