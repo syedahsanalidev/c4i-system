@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './cloudservices.css';
 import * as d3 from 'd3';
 import data from '../../csvs/cloudServices.csv';
+import Navigation from './../navigation';
 
 const CloudServices = ({cloudService,onSelectCloudService, changeCurrentStep}) => {
 
@@ -50,13 +51,7 @@ const CloudServices = ({cloudService,onSelectCloudService, changeCurrentStep}) =
                                 </div>
                             })}
                         </div>
-                        <div className="col-sm-12">
-                            <div className="quiz_next">
-                                <button className="quiz_continueBtn" disabled={cloudService===0} onClick={() => changeCurrentStep(2)}>Continue
-                                </button>
-                            </div>
-                            {/* end of quiz_next */}
-                        </div>
+                        <Navigation/>
                         {/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>

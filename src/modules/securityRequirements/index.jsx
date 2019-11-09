@@ -3,6 +3,7 @@ import MultiSelectBox from 'react-multiselect-box'
 import 'react-multiselect-box/build/css/index.css'
 import * as d3 from "d3";
 import data from "./../../csvs/requirements.csv";
+import Navigation from "../navigation";
 
 const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
@@ -75,13 +76,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                 valueArray={selectedOne}
                             />
                         </div>
-                        <div className="col-sm-12">
-                            <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(4)}>Continue
-                                </button>
-                            </div>
-                            {/* end of quiz_next */}
-                        </div>
+                        <Navigation/>
                         {/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>

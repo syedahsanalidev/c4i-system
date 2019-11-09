@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import CloudServices from './modules/cloudservices'
 import HomeTemplate from './modules/home'
 import SecurityRequirements from './modules/securityRequirements';
@@ -7,9 +7,10 @@ import SummaryChart from './modules/chart';
 import Questions from './modules/questions'
 import * as d3 from "d3";
 import data from "./csvs/evaluations.csv";
+import context from './modules/navigation/context';
 
 function App() {
-    const [currentStep, setCurrentStep] = useState(1);
+    const {step} = useContext(context);
     const [state, setState] = useState({
         cloudService: 0,
         serviceExample: 0,
@@ -18,10 +19,6 @@ function App() {
         networkSecurity: '',
         chartData: []
     });
-
-    function changeCurrentStep(step) {
-        setCurrentStep(step)
-    }
 
     function onSelectCloudService(cloudServiceId) {
         setState({...state, cloudService: cloudServiceId})
@@ -52,7 +49,6 @@ function App() {
                     tempData.push({text: item.title, value: percentage});
                 });
                 setState({...state, chartData: tempData});
-                changeCurrentStep(4);
             }).catch(function (err) {
                 throw err;
             })
@@ -61,23 +57,23 @@ function App() {
         readCsv();
     }
 
-    const {cloudService, requirements, chartData,serviceExample} = state;
+    const {cloudService, requirements, chartData, serviceExample, currentStep} = state;
     return (
         <HomeTemplate>
-            {currentStep === 1 &&
-            <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService}
-                           changeCurrentStep={changeCurrentStep}/>}
-            {currentStep === 2 &&
+
+            {step === 1 &&
+            <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService}/>}
+            {step === 2 &&
             <Services cloudService={cloudService} serviceExample={serviceExample}
-                      changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}
+                      onSelectServices={onSelectServices}
                       onSelectServiceExample={onSelectServiceExample}/>}
-            {currentStep === 3 &&
+            {step === 3 &&
             <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}
-                                  calculatePercentage={calculatePercentage} changeCurrentStep={changeCurrentStep}/>}
-            {currentStep === 4 &&
+                                  calculatePercentage={calculatePercentage}/>}
+            {step === 4 &&
             <Questions requirmentId={'1'} title={'Identity and Access Management'}
                        calculatePercentage={calculatePercentage}/>}
-            {currentStep === 5 && <SummaryChart data={chartData}/>}
+            {step === 5 && <SummaryChart data={chartData}/>}
         </HomeTemplate>
     );
 }
