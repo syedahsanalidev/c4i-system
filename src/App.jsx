@@ -11,6 +11,7 @@ function App() {
     const [currentStep, setCurrentStep] = useState(1);
     const [state, setState] = useState({
         cloudService: 0,
+        serviceExample: 0,
         services: [],
         requirements: '',
         networkSecurity: '',
@@ -29,6 +30,10 @@ function App() {
         setState({...state, services: serviceArray})
     }
 
+    function onSelectServiceExample(serviceExampleId) {
+        setState({...state, serviceExample: serviceExampleId})
+    }
+
     function onSelectRequirements(requirementId) {
         setState({...state, requirements: requirementId})
     }
@@ -37,15 +42,15 @@ function App() {
         function readCsv() {
             d3.csv(data).then(function (response) {
                 const tempData = [];
-                const {services,requirements} = state;
+                const {services, requirements} = state;
                 services.forEach((item) => {
-                    const requirementQuestions = response.filter((evaluationItem) =>evaluationItem.requirementId === requirements);
+                    const requirementQuestions = response.filter((evaluationItem) => evaluationItem.requirementId === requirements);
                     const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.serviceId === item.id);
-                    const sum=serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
-                    const percentage=Math.round((sum/serviceQuestions.length)*100);
-                    tempData.push({text:item.title,value:percentage});
+                    const sum = serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
+                    const percentage = Math.round((sum / serviceQuestions.length) * 100);
+                    tempData.push({text: item.title, value: percentage});
                 });
-                setState({...state,chartData:tempData});
+                setState({...state, chartData: tempData});
                 changeCurrentStep(4);
             }).catch(function (err) {
                 throw err;
@@ -62,7 +67,8 @@ function App() {
                            changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
             <Services cloudService={cloudService}
-                      changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}/>}
+                      changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}
+                      onSelectServiceExample={onSelectServiceExample}/>}
             {currentStep === 3 &&
             <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}
                                   calculatePercentage={calculatePercentage}/>}
