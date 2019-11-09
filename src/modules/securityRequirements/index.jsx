@@ -16,8 +16,6 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
         function readCsv() {
             d3.csv(data).then(function (response) {
                 delete response["columns"];
-                // console.log(response);
-                // response.pop();
                 setState({...state, requirements: response})
             }).catch(function (err) {
                 throw err;
@@ -26,15 +24,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
 
         readCsv()
     }, []);
-    const securityRequirements = [
-        {desc: 'Confidently', value: '1'},
-        {desc: 'Integrity', value: '2'},
-        {desc: 'Accountability', value: '3'},
-        {desc: 'Availability', value: '4'},
-        {desc: 'System Configuration', value: '5'},
-    ];
     const {selectedOne, requirements} = state;
-    // return
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -43,16 +33,15 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                         <h1 className="quiz_title">Security Requirements</h1>
                         <div className="row">
                             <MultiSelectBox
-                                options={securityRequirements}
+                                options={requirements}
                                 labelKey="desc"
                                 valueKey="value"
                                 onAdd={selectedItem => {
-                                    setState({
-                                        selectedOne: [...state.selectedOne, selectedItem.value]
-                                    })
+                                    // debugger
+                                    setState({...state,selectedOne: [...state.selectedOne, selectedItem.value]})
                                 }}
                                 onRemove={(removedItem, index) => {
-                                    setState({
+                                    setState({...state,
                                         selectedOne: [
                                             ...state.selectedOne.filter(
                                                 item => item !== removedItem.value
@@ -61,7 +50,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                     })
                                 }}
                                 onSelectAll={selectedItems => {
-                                    setState({
+                                    setState({...state,
                                         selectedOne: [
                                             ...state.selectedOne,
                                             ...selectedItems.map(item => item.value)
@@ -69,7 +58,7 @@ const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
                                     })
                                 }}
                                 onRemoveAll={() => {
-                                    setState({
+                                    setState({...state,
                                         selectedOne: []
                                     })
                                 }}
