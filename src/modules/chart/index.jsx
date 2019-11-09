@@ -30,6 +30,12 @@ const Chart = ({data}) => {
                     </div>
                     {/* end of quiz_content_area */}
                 </div>
+                <div className="col-sm-12">
+                    <div className="quiz_next">
+                        <button className="quiz_continueBtn">Update</button>
+                    </div>
+                    {/* end of quiz_next */}
+                </div>
                 {/* end of col12 */}
             </div>
             {/* end of row */}
