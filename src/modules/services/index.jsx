@@ -3,7 +3,7 @@ import './services.css';
 import * as d3 from 'd3';
 import data from '../../csvs/services.csv';
 
-const Services = ({onSelectServices,cloudService, changeCurrentStep,onSelectServiceExample}) => {
+const Services = ({onSelectServices,serviceExample,cloudService, changeCurrentStep,onSelectServiceExample}) => {
 
     const [services, setServices] = useState([]);
 
@@ -58,7 +58,7 @@ const Services = ({onSelectServices,cloudService, changeCurrentStep,onSelectServ
                         </div>
                         <div className="col-sm-12">
                             <div className="quiz_next">
-                                <button className="quiz_continueBtn" onClick={() => changeCurrentStep(3)}>Continue
+                                <button className="quiz_continueBtn" disabled={serviceExample===0} onClick={() => changeCurrentStep(3)}>Continue
                                 </button>
                             </div>
                             {/* end of quiz_next */}

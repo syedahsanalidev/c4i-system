@@ -61,14 +61,14 @@ function App() {
         readCsv();
     }
 
-    const {cloudService, requirements, chartData} = state;
+    const {cloudService, requirements, chartData,serviceExample} = state;
     return (
         <HomeTemplate>
             {currentStep === 1 &&
             <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService}
                            changeCurrentStep={changeCurrentStep}/>}
             {currentStep === 2 &&
-            <Services cloudService={cloudService}
+            <Services cloudService={cloudService} serviceExample={serviceExample}
                       changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices}
                       onSelectServiceExample={onSelectServiceExample}/>}
             {currentStep === 3 &&
