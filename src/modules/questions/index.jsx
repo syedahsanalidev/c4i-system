@@ -87,7 +87,7 @@ const Requirements = ({title, requirmentId, calculatePercentage}) => {
                                     <StudentList filter={filter} students={questions}/></>}
                             </div>
                         </div>
-                        <Navigation/>
+                        <Navigation calculatePercentage={calculatePercentage}/>
                         {/* end of col12 */}
                         {/* end of quiz_card_area */}
                     </div>

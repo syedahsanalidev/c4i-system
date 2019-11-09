@@ -7,7 +7,7 @@ const ContextContainer = ({children}) => {
 
     function handleContinue() {
         let tempStep = step;
-        if (step < pages) {
+        if (step < pages+1) {
             tempStep++;
             setStep(tempStep);
         }

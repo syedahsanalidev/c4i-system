@@ -10,7 +10,7 @@ import data from "./csvs/evaluations.csv";
 import context from './modules/navigation/context';
 
 function App() {
-    const {step, pages} = useContext(context);
+    const {step, pages,handleContinue} = useContext(context);
     const [state, setState] = useState({
         cloudService: 0,
         serviceExample: 0,
@@ -54,13 +54,14 @@ function App() {
             })
         }
 
-        readCsv();
+        // readCsv();
+        handleContinue();
     }
 
-    function fetchQuestions(item,index) {
-        if (step===index+4) {
-             return <Questions key={index} requirmentId={item} title={'Identity and Access Management'}
-                       calculatePercentage={calculatePercentage}/>
+    function fetchQuestions(item, index) {
+        if (step === index + 4) {
+            return <Questions key={index} requirmentId={item} title={'Identity and Access Management'}
+                              calculatePercentage={calculatePercentage}/>
         }
     }
 
@@ -76,10 +77,10 @@ function App() {
                       onSelectServiceExample={onSelectServiceExample}/>}
             {step === 3 &&
             <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}/>}
-            {requirements.length>0 && requirements.map((item,index) =>
-                fetchQuestions(item,index)
+            {requirements.length > 0 && requirements.map((item, index) =>
+                fetchQuestions(item, index)
             )}
-            {step === 5 && <SummaryChart data={chartData}/>}
+            {step === pages+1 && <SummaryChart data={chartData}/>}
         </HomeTemplate>
     );
 }
