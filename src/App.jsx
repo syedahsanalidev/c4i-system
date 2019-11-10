@@ -105,7 +105,7 @@ function App() {
                       onSelectServices={onSelectServices}
                       onSelectServiceExample={onSelectServiceExample}/>}
             {step === 3 &&
-            <SecurityRequirements requirmentId={requirements} onSelectRequirements={onSelectRequirements}/>}
+            <SecurityRequirements requirments={requirements} onSelectRequirements={onSelectRequirements}/>}
             {requirements.length > 0 && requirements.map((item, index) =>
                 fetchQuestions(item, index)
             )}

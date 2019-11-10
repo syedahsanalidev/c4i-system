@@ -6,10 +6,10 @@ import data from "./../../csvs/requirements.csv";
 import Navigation from "../navigation";
 import context from './../navigation/context';
 
-const Requirements = ({changeCurrentStep, onSelectRequirements}) => {
+const Requirements = ({ requirments,onSelectRequirements}) => {
     const {pages,setPages} = useContext(context);
     const [state, setState] = useState({
-        selectedOne: [],
+        selectedOne: requirments,
         requirements: []
     });
 
