@@ -44,27 +44,32 @@ function App() {
             const evaluations = await d3.csv(data);
             const providers = await d3.csv(providersData);
             const serviceInProviders = await d3.csv(serviceInProviderData);
-            const filterdServiceInProvider=serviceInProviders.filter(function (item) {
-                return item.serviceId===serviceExample && item.isAvailable==="1"
+            const filterdServiceInProvider = serviceInProviders.filter(function (item) {
+                return item.serviceId === serviceExample && item.isAvailable === "1"
             })
             const tempData = [];
-            let columns = [];
-            columns.push("Security Requirements");
+            let headings = [];
+            headings.push("Security Requirements");
 
             filterdServiceInProvider.forEach(function (item) {
-                columns.push(item.providerId);
+                headings.push(item.providerId);
             });
-            tempData.push(columns);
-            // requirements.forEach(function (item) {
-            //     columns.push(item);
-            // });
-            // services.forEach((item) => {
-            //     const requirementQuestions = evaluations.filter((evaluationItem) => evaluationItem.requirementId === requirements);
-            //     const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.serviceId === item.id);
-            //     const sum = serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
-            //     const percentage = Math.round((sum / serviceQuestions.length) * 100);
-            //     tempData.push({text: item.title, value: percentage});
-            // });
+            tempData.push(headings);
+            requirements.forEach(function (item) {
+                let columns = [];
+                headings.forEach(function (heading, index) {
+                    if (index === 0) {
+                        columns.push(item);
+                    } else {
+                        const requirementQuestions = evaluations.filter((evaluationItem) => evaluationItem.requirementId === item);
+                        const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.providerId === heading);
+                        const sum = serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
+                        const percentage = Math.round((sum / serviceQuestions.length) * 100);
+                        columns.push(percentage);
+                    }
+                })
+                tempData.push(columns);
+            });
             setState({...state, chartData: tempData});
         }
 
