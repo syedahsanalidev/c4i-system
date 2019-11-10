@@ -6,6 +6,7 @@ import Navigation from "../navigation";
 
 const Services = ({onSelectServices,serviceExample,cloudService, changeCurrentStep,onSelectServiceExample}) => {
 
+    const [selectedService]=useState(serviceExample);
     const [services, setServices] = useState([]);
 
     useEffect(() => {
@@ -37,7 +38,9 @@ const Services = ({onSelectServices,serviceExample,cloudService, changeCurrentSt
                                         <input name="ServiceExample" className="quiz_checkbox"
                                                onClick={()=>onSelectServiceExample(id)}
                                                type="radio"
-                                               id={id} defaultValue={id}/>
+                                               id={id} defaultValue={id}
+                                               defaultChecked={id===selectedService}
+                                        />
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
                                                 <div className="quiz_card_icon">
