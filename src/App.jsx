@@ -55,7 +55,15 @@ function App() {
             filterdServiceInProvider.forEach(function (item) {
                 headings.push(item.providerId);
             });
-            tempData.push(headings);
+            let tempheadings = [];
+            tempheadings.push("Security Requirements");
+            filterdServiceInProvider.forEach(function (item) {
+                const providerObj=providers.find(function (providerItem) {
+                    return providerItem.id===item.providerId;
+                })
+                tempheadings.push(providerObj.title);
+            });
+            tempData.push(tempheadings);
             requirements.forEach(function (item) {
                 let columns = [];
                 headings.forEach(function (heading, index) {
