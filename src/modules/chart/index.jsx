@@ -1,7 +1,15 @@
 import React, {useState, useRef} from 'react';
-import { Chart } from "react-google-charts";
+import {Chart} from "react-google-charts";
 
 const ChartComponent = ({data}) => {
+    const tempdata = [
+        ['Year', 'Sales', 'Expenses', 'Profit'],
+        ['2014', 1000, 400, 200],
+        ['2015', 1170, 460, 250],
+        ['2016', 660, 1120, 300],
+        ['2017', 1030, 540, 350],
+    ];
+    console.log(data);
     return (<section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
@@ -14,13 +22,7 @@ const ChartComponent = ({data}) => {
                                 height={'300px'}
                                 chartType="Bar"
                                 loader={<div>Loading Chart</div>}
-                                data={[
-                                    ['Year', 'Sales', 'Expenses', 'Profit'],
-                                    ['2014', 1000, 400, 200],
-                                    ['2015', 1170, 460, 250],
-                                    ['2016', 660, 1120, 300],
-                                    ['2017', 1030, 540, 350],
-                                ]}
+                                data={data}
                                 options={{
                                     // Material design options
                                     chart: {
@@ -29,7 +31,7 @@ const ChartComponent = ({data}) => {
                                     },
                                 }}
                                 // For tests
-                                rootProps={{ 'data-testid': '2' }}
+                                rootProps={{'data-testid': '2'}}
                             />
                         </div>
                         {/* end of quiz_card_area */}
