@@ -7,10 +7,12 @@ import SummaryChart from './modules/chart';
 import Questions from './modules/questions'
 import * as d3 from "d3";
 import data from "./csvs/evaluations.csv";
+import providersData from "./csvs/providers.csv";
+import serviceInProviderData from "./csvs/serviceInProvider.csv";
 import context from './modules/navigation/context';
 
 function App() {
-    const {step, pages,handleContinue} = useContext(context);
+    const {step, pages, handleContinue} = useContext(context);
     const [state, setState] = useState({
         cloudService: 0,
         serviceExample: 0,
@@ -37,24 +39,36 @@ function App() {
     }
 
     function calculatePercentage() {
-        function readCsv() {
-            d3.csv(data).then(function (response) {
-                const tempData = [];
-                const {services, requirements} = state;
-                services.forEach((item) => {
-                    const requirementQuestions = response.filter((evaluationItem) => evaluationItem.requirementId === requirements);
-                    const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.serviceId === item.id);
-                    const sum = serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
-                    const percentage = Math.round((sum / serviceQuestions.length) * 100);
-                    tempData.push({text: item.title, value: percentage});
-                });
-                setState({...state, chartData: tempData});
-            }).catch(function (err) {
-                throw err;
+        async function readCsv() {
+            const {services, requirements, serviceExample} = state;
+            const evaluations = await d3.csv(data);
+            const providers = await d3.csv(providersData);
+            const serviceInProviders = await d3.csv(serviceInProviderData);
+            const filterdServiceInProvider=serviceInProviders.filter(function (item) {
+                return item.serviceId===serviceExample && item.isAvailable==="1"
             })
+            const tempData = [];
+            let columns = [];
+            columns.push("Security Requirements");
+
+            filterdServiceInProvider.forEach(function (item) {
+                columns.push(item.providerId);
+            });
+            tempData.push(columns);
+            // requirements.forEach(function (item) {
+            //     columns.push(item);
+            // });
+            // services.forEach((item) => {
+            //     const requirementQuestions = evaluations.filter((evaluationItem) => evaluationItem.requirementId === requirements);
+            //     const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.serviceId === item.id);
+            //     const sum = serviceQuestions.reduce((a, b) => parseFloat(a) + parseFloat((b['score'] || 0)), 0);
+            //     const percentage = Math.round((sum / serviceQuestions.length) * 100);
+            //     tempData.push({text: item.title, value: percentage});
+            // });
+            setState({...state, chartData: tempData});
         }
 
-        // readCsv();
+        readCsv();
         handleContinue();
     }
 
@@ -80,7 +94,7 @@ function App() {
             {requirements.length > 0 && requirements.map((item, index) =>
                 fetchQuestions(item, index)
             )}
-            {step === pages+1 && <SummaryChart data={chartData}/>}
+            {step === pages + 1 && <SummaryChart data={chartData}/>}
         </HomeTemplate>
     );
 }
