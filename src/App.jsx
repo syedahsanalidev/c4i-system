@@ -96,7 +96,6 @@ function App() {
     }
 
     const {cloudService, requirements, chartData, serviceExample, currentStep} = state;
-    console.log({requirements, pages});
     return (
         <HomeTemplate>
             {step === 1 &&

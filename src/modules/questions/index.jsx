@@ -71,7 +71,6 @@ const Requirements = ({ requirmentId, calculatePercentage}) => {
     }
 
     const {questions,title} = state;
-    console.log(questions)
     return <section className="quiz_section" id="quizeSection">
         <div className="container">
             <div className="row">
