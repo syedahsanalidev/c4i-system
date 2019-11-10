@@ -46,21 +46,21 @@ const StudentList = ({students, filter}) => {
     )
 };
 
-const Requirements = ({title, requirmentId, calculatePercentage}) => {
+const Requirements = ({ requirmentId, calculatePercentage}) => {
 
     const [state, setState] = useState({
-        questions: []
+        questions: [],
+        title:''
     });
     const [filter, setFilter] = useState('');
 
     useEffect(() => {
-        function readCsvForRequirements() {
-            d3.csv(questionsData).then(function (questionsResponse) {
-                const filteredQuestions = questionsResponse.filter((item) => item.requirementId === requirmentId);
-                setState({...state, questions: filteredQuestions});
-            }).catch(function (err) {
-                throw err;
-            })
+        async function readCsvForRequirements() {
+            const questionsResponse=await d3.csv(questionsData);
+            const requirements=await d3.csv(data);
+            const requirementObj = requirements.find((item) => item.value === requirmentId);
+            const filteredQuestions = questionsResponse.filter((item) => item.requirementId === requirmentId);
+            setState({...state, questions: filteredQuestions,title:requirementObj.desc});
         }
 
         readCsvForRequirements();
@@ -70,7 +70,7 @@ const Requirements = ({title, requirmentId, calculatePercentage}) => {
         setFilter(inputValue);
     }
 
-    const {requirements, questions} = state;
+    const {questions,title} = state;
     console.log(questions)
     return <section className="quiz_section" id="quizeSection">
         <div className="container">

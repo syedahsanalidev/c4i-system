@@ -91,8 +91,7 @@ function App() {
 
     function fetchQuestions(item, index) {
         if (step === index + 4) {
-            return <Questions key={index} requirmentId={item} title={'Identity and Access Management'}
-                              calculatePercentage={calculatePercentage}/>
+            return <Questions key={index} requirmentId={item} calculatePercentage={calculatePercentage}/>
         }
     }
 
