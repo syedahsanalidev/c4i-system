@@ -10,8 +10,8 @@ const ChartComponent = ({data}) => {
                         <h1 className="quiz_title">Recommended Service Provider</h1>
                         <div className="row">
                             <Chart
-                                width={'500px'}
-                                height={'300px'}
+                                width={'1000px'}
+                                height={'500px'}
                                 chartType="Bar"
                                 loader={<div>Loading Chart</div>}
                                 data={data}
