@@ -9,6 +9,7 @@ import * as d3 from "d3";
 import data from "./csvs/evaluations.csv";
 import providersData from "./csvs/providers.csv";
 import serviceInProviderData from "./csvs/serviceInProvider.csv";
+import requirementsData from "./csvs/requirements.csv";
 import context from './modules/navigation/context';
 
 function App() {
@@ -40,17 +41,17 @@ function App() {
 
     function calculatePercentage() {
         async function readCsv() {
-            const {services, requirements, serviceExample} = state;
+            const {requirements, serviceExample} = state;
             const evaluations = await d3.csv(data);
             const providers = await d3.csv(providersData);
             const serviceInProviders = await d3.csv(serviceInProviderData);
+            const requirementsCSv = await d3.csv(requirementsData);
             const filterdServiceInProvider = serviceInProviders.filter(function (item) {
                 return item.serviceId === serviceExample && item.isAvailable === "1"
-            })
+            });
             const tempData = [];
             let headings = [];
             headings.push("Security Requirements");
-
             filterdServiceInProvider.forEach(function (item) {
                 headings.push(item.providerId);
             });
@@ -59,7 +60,10 @@ function App() {
                 let columns = [];
                 headings.forEach(function (heading, index) {
                     if (index === 0) {
-                        columns.push(item);
+                        const requirementObj=requirementsCSv.find(function (requirementItem) {
+                            return requirementItem.value===item;
+                        })
+                        columns.push(requirementObj.desc);
                     } else {
                         const requirementQuestions = evaluations.filter((evaluationItem) => evaluationItem.requirementId === item);
                         const serviceQuestions = requirementQuestions.filter((evaluationItem) => evaluationItem.providerId === heading);
