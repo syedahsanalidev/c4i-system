@@ -6,6 +6,7 @@ import Navigation from './../navigation';
 
 const CloudServices = ({cloudService,onSelectCloudService, changeCurrentStep}) => {
 
+    const [selectedService] = useState(cloudService);
     const [cloudServices, setCloudServices] = useState([]);
     useEffect(() => {
         function readCsv() {
@@ -31,7 +32,9 @@ const CloudServices = ({cloudService,onSelectCloudService, changeCurrentStep}) =
                                         <input name="cloudService" className="quiz_checkbox"
                                                onClick={() => onSelectCloudService(id)}
                                                type="radio"
-                                               id={id} defaultValue={id}/>
+                                               id={id} defaultValue={id}
+                                               defaultChecked={id===selectedService}
+                                        />
                                         <div className="single_quiz_card">
                                             <div className="quiz_card_content">
                                                 <div className="quiz_card_icon">
