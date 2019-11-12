@@ -64,6 +64,7 @@ function App() {
                 tempheadings.push(providerObj.title);
             });
             tempData.push(tempheadings);
+            const rowsData=[];
             requirements.forEach(function (item) {
                 let columns = [];
                 headings.forEach(function (heading, index) {
@@ -80,9 +81,21 @@ function App() {
                         columns.push(percentage);
                     }
                 })
-                tempData.push(columns);
+                rowsData.push(columns);
             });
-            setState({...state, chartData: tempData});
+            var colSum = rowsData.reduce(function(a, b) {
+                return  a.map(function(x, i) {
+                    return  x + b[i];
+                });
+            });
+            colSum.forEach(function (item,i) {
+                if(i!==0){
+                    colSum[i]=Math.round(item/rowsData.length);
+                }else{
+                    colSum[i]='Overall'
+                }
+            });
+            setState({...state, chartData: [...tempData,...rowsData,colSum]});
         }
 
         readCsv();
