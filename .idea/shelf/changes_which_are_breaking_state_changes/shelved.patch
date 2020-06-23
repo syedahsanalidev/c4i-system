@@ -1,0 +1,105 @@
+Index: src/modules/services/index.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useState, useEffect} from 'react';\nimport './services.css';\nimport * as d3 from 'd3';\nimport data from './services.csv';\n\nconst Services = ({cloudService, changeCurrentStep}) => {\n\n    const [services, setServices] = useState([]);\n\n    useEffect(() => {\n        function readCsv() {\n            d3.csv(data).then(function (response) {\n                const filteredData=response.filter(function (item) {\n                    return item.cloudServiceId === cloudService;\n                });\n                setServices(filteredData);\n            }).catch(function (err) {\n                throw err;\n            })\n        }\n\n        readCsv()\n    }, []);\n\n    return <section className=\"quiz_section\" id=\"quizeSection\">\n        <div className=\"container\">\n            <div className=\"row\">\n                <div className=\"col-sm-12\" style={{marginTop: \"10px\"}}>\n                    <div className=\"quiz_content_area\">\n                        <h1 className=\"quiz_title\">Services</h1>\n                        <div className=\"row\">\n                            {services.map(({title, id}) => {\n                                return <div key={id} className=\"col-sm-3\">\n                                    <div className=\"quiz_card_area\">\n                                        <input className=\"quiz_checkbox\"\n                                               type=\"checkbox\"\n                                               id={id} defaultValue={id} disabled/>\n                                        <div className=\"single_quiz_card\">\n                                            <div className=\"quiz_card_content\">\n                                                <div className=\"quiz_card_icon\">\n                                                    <div className=\"quiz_icon quiz_icon1\"/>\n                                                </div>\n                                                {/* end of quiz_card_media */}\n                                                <div className=\"quiz_card_title\">\n                                                    <h3><i className=\"fa fa-check\" aria-hidden=\"true\"/> {title}</h3>\n                                                </div>\n                                                {/* end of quiz_card_title */}\n                                            </div>\n                                            {/* end of quiz_card_content */}\n                                        </div>\n                                        {/* end of single_quiz_card */}\n                                    </div>\n                                    {/* end of quiz_card_area */}\n                                </div>\n                            })}\n                        </div>\n                        <div className=\"col-sm-12\">\n                            <div className=\"quiz_next\">\n                                <button className=\"quiz_continueBtn\" onClick={() => changeCurrentStep(3)}>Continue\n                                </button>\n                            </div>\n                            {/* end of quiz_next */}\n                        </div>\n                        {/* end of col12 */}\n                        {/* end of quiz_card_area */}\n                    </div>\n                    {/* end of quiz_content_area */}\n                </div>\n                {/* end of col12 */}\n            </div>\n            {/* end of row */}\n        </div>\n        {/* end of container */}\n    </section>\n};\nexport default Services;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/services/index.jsx	(date 1572589482000)
++++ src/modules/services/index.jsx	(date 1572591317000)
+@@ -3,7 +3,7 @@
+ import * as d3 from 'd3';
+ import data from './services.csv';
+ 
+-const Services = ({cloudService, changeCurrentStep}) => {
++const Services = ({onSelectServices,cloudService, changeCurrentStep}) => {
+ 
+     const [services, setServices] = useState([]);
+ 
+@@ -14,6 +14,7 @@
+                     return item.cloudServiceId === cloudService;
+                 });
+                 setServices(filteredData);
++                // onSelectServices(filteredData);
+             }).catch(function (err) {
+                 throw err;
+             })
+Index: src/modules/securityRequirements/index.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useEffect, useState} from 'react';\nimport * as d3 from \"d3\";\nimport questionsData from \"./questions.csv\";\nimport data from \"./requirements.csv\";\nimport './securityRequirements.css'\n\nconst StudentFilter = ({updateSearch, searchText}) => {\n\n    function handleChange(event) {\n        updateSearch(event.target.value);\n    }\n\n    return (\n        <input type=\"text\" placeholder=\"Search here for Questions\" className=\"input-search\" onChange={handleChange}\n               value={searchText}/>\n    )\n};\n\nconst Student = ({student}) => <tbody>\n<tr>\n    <td className=\"student-item\">{student.questionTitle}</td>\n    <td className=\"student-item\">{student.metrices}</td>\n</tr>\n</tbody>;\n\nconst StudentList = ({students, filter}) => {\n    function filterStudents(students) {\n        if (!filter) {\n            return students\n        }\n        return students.filter((student) => student.questionTitle.toLowerCase().indexOf(filter.toLowerCase()) >= 0)\n    }\n\n    return (\n        <table className=\"student-list\">\n            <thead>\n            <tr>\n                <th>Questions</th>\n                <th>Metrices</th>\n            </tr>\n            </thead>\n            {filterStudents(students)\n                .map((student) => <Student key={student.id} student={student}/>)}\n        </table>\n    )\n};\n\nconst Requirements = ({requirmentId, changeCurrentStep, onSelectRequirements}) => {\n\n    const [state, setState] = useState({\n        requirements: [],\n        questions: []\n    });\n    const [filter, setFilter] = useState('');\n\n    useEffect(() => {\n        function readCsvForRequirements() {\n            d3.csv(data).then(function (response) {\n                response.pop();\n                d3.csv(questionsData).then(function (questionsResponse) {\n                    setState({...state, questions: questionsResponse, requirements: response});\n                }).catch(function (err) {\n                    throw err;\n                })\n            }).catch(function (err) {\n                throw err;\n            })\n        }\n\n        readCsvForRequirements();\n    }, []);\n\n    function updateSearch(inputValue) {\n        setFilter(inputValue);\n    }\n\n    function handleRequirementChange(event) {\n        const {questions} = state;\n        const filteredQuestions = questions.filter((item) => item.id === event.target.value);\n        setState({...state, questions: filteredQuestions});\n        onSelectRequirements(event.target.value);\n    }\n\n    const {requirements, questions} = state;\n    return <section className=\"quiz_section\" id=\"quizeSection\">\n        <div className=\"container\">\n            <div className=\"row\">\n                <div className=\"col-sm-12\" style={{marginTop: \"10px\"}}>\n                    <div className=\"quiz_content_area\">\n                        <h1 className=\"quiz_title\">Security Requirements</h1>\n                        <div className=\"row\">\n                            <div className=\"col-sm-12 align-center mb-10\">\n                                <select onChange={handleRequirementChange}>\n                                    <option value=\"0\">Select Secuirty Requirements</option>\n                                    {requirements.map((item) => {\n                                        return <option key={item.value} value={item.value}>{item.desc}</option>\n                                    })}\n                                </select>\n                            </div>\n                            <div className=\"col-sm-12\">\n                                <h1 className=\"app__title\">Questions and Metrices</h1>\n                                {(questions.length > 0 && requirmentId) && <>\n                                    <StudentFilter updateSearch={updateSearch}\n                                                   searchText={filter}/>\n                                    <StudentList filter={filter} students={questions}/></>}\n                            </div>\n                        </div>\n                        <div className=\"col-sm-12\">\n                            <div className=\"quiz_next\">\n                                <button className=\"quiz_continueBtn\" disabled={requirmentId === '' ? true : false}\n                                        onClick={() => changeCurrentStep(4)}>Calculate\n                                </button>\n                            </div>\n                            {/* end of quiz_next */}\n                        </div>\n                        {/* end of col12 */}\n                        {/* end of quiz_card_area */}\n                    </div>\n                    {/* end of quiz_content_area */}\n                </div>\n                {/* end of col12 */}\n            </div>\n            {/* end of row */}\n        </div>\n        {/* end of container */}\n    </section>\n};\n\nexport default Requirements;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/securityRequirements/index.jsx	(date 1572589482000)
++++ src/modules/securityRequirements/index.jsx	(date 1572590480000)
+@@ -45,7 +45,7 @@
+     )
+ };
+ 
+-const Requirements = ({requirmentId, changeCurrentStep, onSelectRequirements}) => {
++const Requirements = ({requirmentId, calculatePercentage, onSelectRequirements}) => {
+ 
+     const [state, setState] = useState({
+         requirements: [],
+@@ -108,7 +108,7 @@
+                         <div className="col-sm-12">
+                             <div className="quiz_next">
+                                 <button className="quiz_continueBtn" disabled={requirmentId === '' ? true : false}
+-                                        onClick={() => changeCurrentStep(4)}>Calculate
++                                        onClick={() => calculatePercentage()}>Calculate
+                                 </button>
+                             </div>
+                             {/* end of quiz_next */}
+Index: src/App.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useState} from 'react';\nimport CloudServices from './modules/cloudservices'\nimport HomeTemplate from './modules/home'\nimport SecurityRequirements from './modules/securityRequirements';\nimport Services from './modules/services';\nimport SummaryChart from './modules/chart';\n\nfunction App() {\n    const [currentStep, setCurrentStep] = useState(1);\n    const [state, setState] = useState({\n        cloudService: 0,\n        requirements: '',\n        networkSecurity:''\n    })\n\n    function changeCurrentStep(step) {\n        setCurrentStep(step)\n    }\n\n    function onSelectCloudService(cloudServiceId) {\n        setState({...state, cloudService: cloudServiceId})\n    }\n\n    function onSelectRequirements(requirementId) {\n        setState({...state, requirements: requirementId})\n    }\n\n    const {cloudService,requirements} = state;\n    return (\n        <HomeTemplate>\n            {currentStep === 1 &&\n            <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}\n            {currentStep === 2 &&\n            <Services cloudService={cloudService}\n                      changeCurrentStep={changeCurrentStep}/>}\n            {currentStep === 3 &&\n            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}\n            {currentStep === 4 && <SummaryChart/>}\n        </HomeTemplate>\n    );\n}\n\nexport default App;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.jsx	(date 1572589482000)
++++ src/App.jsx	(date 1572591420000)
+@@ -9,6 +9,7 @@
+     const [currentStep, setCurrentStep] = useState(1);
+     const [state, setState] = useState({
+         cloudService: 0,
++        services:[],
+         requirements: '',
+         networkSecurity:''
+     })
+@@ -21,9 +22,20 @@
+         setState({...state, cloudService: cloudServiceId})
+     }
+ 
++    function onSelectServices(serviceArray) {
++        setState({...state, services: serviceArray})
++    }
++
+     function onSelectRequirements(requirementId) {
+         setState({...state, requirements: requirementId})
+     }
++    
++    function calculatePercentage() {
++        // const {services}=state;
++        // console.log(services);
++        debugger
++        // changeCurrentStep(4);
++    }
+ 
+     const {cloudService,requirements} = state;
+     return (
+@@ -32,10 +44,10 @@
+             <CloudServices cloudService={cloudService} onSelectCloudService={onSelectCloudService} changeCurrentStep={changeCurrentStep}/>}
+             {currentStep === 2 &&
+             <Services cloudService={cloudService}
+-                      changeCurrentStep={changeCurrentStep}/>}
++                      changeCurrentStep={changeCurrentStep} onSelectServices={onSelectServices()}/>}
+             {currentStep === 3 &&
+-            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} changeCurrentStep={changeCurrentStep}/>}
+-            {currentStep === 4 && <SummaryChart/>}
++            <SecurityRequirements  requirmentId={requirements} onSelectRequirements={onSelectRequirements} calculatePercentage={calculatePercentage}/>}
++            {<SummaryChart/>}
+         </HomeTemplate>
+     );
+ }
